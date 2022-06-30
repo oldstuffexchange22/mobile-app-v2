@@ -1,3 +1,5 @@
+import 'package:old_stuff_exchange/model/entity/building.dart';
+
 import 'role.dart';
 
 class User {
@@ -11,7 +13,7 @@ class User {
       required this.email,
       required this.imagesUrl,
       required this.role,
-      required this.buildingId});
+      required this.building});
   String id;
   String userName;
   String fullName;
@@ -21,7 +23,7 @@ class User {
   String email;
   String imagesUrl;
   Role role;
-  String buildingId;
+  Building? building;
 
   factory User.fromJon(Map<String, dynamic> json) => User(
       id: json['id'],
@@ -33,7 +35,7 @@ class User {
       email: json['email'],
       imagesUrl: json['imagesUrl'],
       role: Role.fromJson(json['role']),
-      buildingId: json['buildingId']);
+      building: Building.fromJson(json['building']));
 
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -45,6 +47,6 @@ class User {
         'email': email,
         'imagesUrl': imagesUrl,
         'role': role.toJson(),
-        'buildingId': buildingId
+        'buildingId': building?.id
       };
 }

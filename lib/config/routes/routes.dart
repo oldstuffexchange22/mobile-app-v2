@@ -4,7 +4,7 @@ import 'package:old_stuff_exchange/view/login/signin_page.dart';
 
 class Routes {
   static final Map<String, Widget Function(BuildContext)> routes = {
-    "/signInPage": (context) => const SignInPage(),
+    "/signInPage": (context) => SignInPage(),
     "/homePage": (context) => const HomePage()
   };
 }

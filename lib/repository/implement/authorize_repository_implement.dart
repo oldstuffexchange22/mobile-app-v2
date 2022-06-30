@@ -15,10 +15,9 @@ class AuthorizeRepImp implements AuthorizeRepository {
     var result = LoginFirebaseResponse();
     try {
       Response response = await Dio().post(url, data: {"token": request.token});
-      result = LoginFirebaseResponse.fromJson(response.data);
+      result = LoginFirebaseResponse.fromJson(response.data['data']);
     } on DioError catch (e) {
-      // showToastFail(e.response?.data['message']);
-      print(e);
+      showToastFail(e.response?.data['message']);
     }
     return result;
   }

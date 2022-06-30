@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:old_stuff_exchange/config/themes/appColors.dart';
+import 'package:old_stuff_exchange/config/themes/fonts.dart';
 
 class ButtonSocial extends StatelessWidget {
   const ButtonSocial(
@@ -24,18 +26,21 @@ class ButtonSocial extends StatelessWidget {
       child: OutlinedButton(
         onPressed: voidCallBack,
         style: OutlinedButton.styleFrom(
-          side: const BorderSide(width: 1.0, color: Colors.blue),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        ),
+            side: const BorderSide(width: 1.0, color: Colors.blue),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(26)),
+            backgroundColor: kColorBlue),
         child: Row(
           children: <Widget>[
-            Image.asset(assetName),
             const SizedBox(
-              width: 50,
+              width: 16,
+            ),
+            SizedBox(width: 30, height: 40, child: Image.asset(assetName)),
+            const SizedBox(
+              width: 16,
             ),
             Text(content,
-                style: const TextStyle(color: Colors.black, fontSize: 16.0)),
+                style: PrimaryFont.regular(18).copyWith(color: kColorWhite)),
             Opacity(opacity: 0.0, child: Image.asset(assetName))
           ],
         ),

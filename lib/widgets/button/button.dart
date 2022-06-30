@@ -1,6 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:old_stuff_exchange/config/themes/theme.dart';
+import 'package:old_stuff_exchange/config/themes/appColors.dart';
 
 class ButtonDefault extends StatelessWidget {
   const ButtonDefault(

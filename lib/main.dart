@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:old_stuff_exchange/config/routes/routes.dart';
 import 'package:old_stuff_exchange/view_model/provider/main_provider/main_provider.dart';
 import 'package:provider/provider.dart';
@@ -18,12 +19,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: MainProviders.providers,
-      child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Old stuff exchange',
-          theme: ThemeData(primarySwatch: Colors.blue, fontFamily: "Roboto"),
-          initialRoute: "/signInPage",
-          routes: Routes.routes),
+      child: GlobalLoaderOverlay(
+        child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Old stuff exchange',
+            theme: ThemeData(primarySwatch: Colors.blue, fontFamily: "Blinker"),
+            initialRoute: "/signInPage",
+            routes: Routes.routes),
+      ),
     );
   }
 }

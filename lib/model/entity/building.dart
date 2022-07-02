@@ -1,13 +1,9 @@
 class Building {
-  Building(
-      {required this.id,
-      required this.name,
-      required this.description,
-      required this.apartmentId});
-  String id;
-  String name;
+  Building({this.id, this.name, this.description, this.apartmentId});
+  String? id;
+  String? name;
   String? description;
-  String apartmentId;
+  String? apartmentId;
 
   factory Building.fromJson(Map<String, dynamic> json) => Building(
       id: json['id'],

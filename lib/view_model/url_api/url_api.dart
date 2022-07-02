@@ -4,4 +4,6 @@ class UrlApi {
   static const String signinFirebase = '$serverPath/authorizes/firebase';
   static const String userController = '$serverPath/users';
   static const String postController = '$serverPath/posts';
+  static const String apartmentController = '$serverPath/apartments';
+  static const String buildingController = '$serverPath/buildings';
 }

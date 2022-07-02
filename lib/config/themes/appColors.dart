@@ -8,3 +8,5 @@ final kColorText = HexColor('D0D0D0');
 final kColorButton = HexColor('D9D9D9');
 final kColorBtnLogin = HexColor('6A74CF');
 final kColorBlue = HexColor('5073B5');
+final kColorBackGroundStart = HexColor('DEC4FC');
+final kColorBackGroundEnd = HexColor('91C6FC');

@@ -102,8 +102,6 @@ class _SignInPageState extends State<SignInPage> {
                                 child: ElevatedButton(
                                     style: styleBtnLogin,
                                     onPressed: () {
-                                      final userName = userNameController.text;
-                                      final password = passwordController.text;
                                       showToastFail('Chức năng chưa hỗ trợ');
                                     },
                                     child: const Text('Login')))
@@ -138,6 +136,7 @@ class _SignInPageState extends State<SignInPage> {
                               voidCallBack: () async {
                                 await signInProvider.signInWithGoogle(context);
                               },
+                              
                               assetName: AssetPath.google),
                         ),
                       ),

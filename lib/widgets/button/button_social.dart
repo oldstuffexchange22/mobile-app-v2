@@ -33,14 +33,14 @@ class ButtonSocial extends StatelessWidget {
         child: Row(
           children: <Widget>[
             const SizedBox(
-              width: 16,
+              width: 12,
             ),
-            SizedBox(width: 30, height: 40, child: Image.asset(assetName)),
+            SizedBox(width: 24, height: 40, child: Image.asset(assetName)),
             const SizedBox(
               width: 16,
             ),
             Text(content,
-                style: PrimaryFont.regular(18).copyWith(color: kColorWhite)),
+                style: PrimaryFont.regular(14).copyWith(color: kColorWhite)),
             Opacity(opacity: 0.0, child: Image.asset(assetName))
           ],
         ),

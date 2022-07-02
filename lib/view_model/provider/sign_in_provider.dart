@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:jwt_decode/jwt_decode.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:old_stuff_exchange/config/toast/toast.dart';
 import 'package:old_stuff_exchange/model/entity/post.dart';
@@ -39,11 +40,17 @@ class SignInProvider with ChangeNotifier {
                 .then((value) async {
               final navigator = Navigator.of(context);
               await secureStorage.writeSecureData('token', value.token ?? '');
-              showToastSuccess('Login success');
-              List<Post>? list =
-                  await PostRepImp().getList('ACTIVE', 1, 10, '', '', '');
+
+              Map<String, dynamic> tokenDecode =
+                  Jwt.parseJwt(value.token ?? '');
+              String apartmentId = tokenDecode['apartmentId'];
+              if (apartmentId.isEmpty) {
+                navigator.pushNamed('/updateAddressPage');
+              } else {
+                navigator.pushReplacementNamed('/homePage');
+                showToastSuccess('Login success');
+              }
               context.loaderOverlay.hide();
-              navigator.pushReplacementNamed('/homePage');
             });
           }
         }

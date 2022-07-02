@@ -13,7 +13,7 @@ class User {
       required this.email,
       required this.imagesUrl,
       required this.role,
-      required this.building});
+      this.building});
   String id;
   String userName;
   String fullName;
@@ -25,7 +25,7 @@ class User {
   Role role;
   Building? building;
 
-  factory User.fromJon(Map<String, dynamic> json) => User(
+  factory User.fromJson(Map<String, dynamic> json) => User(
       id: json['id'],
       userName: json['userName'],
       fullName: json['fullName'],
@@ -35,7 +35,9 @@ class User {
       email: json['email'],
       imagesUrl: json['imagesUrl'],
       role: Role.fromJson(json['role']),
-      building: Building.fromJson(json['building']));
+      building: json['building'] == null
+          ? null
+          : Building.fromJson(json['building']));
 
   Map<String, dynamic> toJson() => {
         'id': id,

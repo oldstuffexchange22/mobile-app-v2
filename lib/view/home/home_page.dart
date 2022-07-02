@@ -67,18 +67,7 @@ class _HomePageState extends State<HomePage> {
     UserProvider userProvider = Provider.of<UserProvider>(context);
     // userProvider.getCurrentUser();
     var screenSize = MediaQuery.of(context).size;
-    List<Widget> appbar = [
-      HomeAppBarContainer(
-          screenSize: screenSize, searchController: searchController),
-      const ManagePostAppBarContainer(),
-      const NotifyAppBarContainer(),
-      const ExtendAppBarContainer()
-    ];
     return Scaffold(
-      appBar: AppBar(
-          title: Container(
-        child: appbar[_selectedBottomNavigationIndex],
-      )),
       body: IndexedStack(
         index: _selectedBottomNavigationIndex,
         children: _bottomNavigationItems

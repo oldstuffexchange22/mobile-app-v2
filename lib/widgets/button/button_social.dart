@@ -20,6 +20,7 @@ class ButtonSocial extends StatelessWidget {
   final String assetName;
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
     return SizedBox(
       width: width,
       height: height,
@@ -31,6 +32,7 @@ class ButtonSocial extends StatelessWidget {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(26)),
             backgroundColor: kColorBlue),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const SizedBox(
               width: 12,
@@ -40,7 +42,8 @@ class ButtonSocial extends StatelessWidget {
               width: 16,
             ),
             Text(content,
-                style: PrimaryFont.regular(14).copyWith(color: kColorWhite)),
+                style: PrimaryFont.regular(screenSize.width * 0.048)
+                    .copyWith(color: kColorWhite)),
             Opacity(opacity: 0.0, child: Image.asset(assetName))
           ],
         ),

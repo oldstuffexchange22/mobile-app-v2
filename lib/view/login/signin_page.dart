@@ -13,7 +13,7 @@ import 'package:old_stuff_exchange/widgets/button/button_social.dart';
 import 'package:provider/provider.dart';
 
 class SignInPage extends StatefulWidget {
-  SignInPage({Key? key}) : super(key: key);
+  const SignInPage({Key? key}) : super(key: key);
 
   @override
   State<SignInPage> createState() => _SignInPageState();
@@ -136,7 +136,6 @@ class _SignInPageState extends State<SignInPage> {
                               voidCallBack: () async {
                                 await signInProvider.signInWithGoogle(context);
                               },
-                              
                               assetName: AssetPath.google),
                         ),
                       ),

@@ -27,13 +27,13 @@ class User {
 
   factory User.fromJson(Map<String, dynamic> json) => User(
       id: json['id'],
-      userName: json['userName'],
-      fullName: json['fullName'],
-      status: json['status'],
-      phone: json['phone'],
-      gender: json['gender'],
-      email: json['email'],
-      imagesUrl: json['imagesUrl'],
+      userName: json['userName'] ?? '',
+      fullName: json['fullName'] ?? '',
+      status: json['status'] ?? '',
+      phone: json['phone'] ?? '',
+      gender: json['gender'] ?? '',
+      email: json['email'] ?? '',
+      imagesUrl: json['imagesUrl'] ?? '',
       role: Role.fromJson(json['role']),
       building: json['building'] == null
           ? null

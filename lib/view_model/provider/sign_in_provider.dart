@@ -9,6 +9,7 @@ import 'package:old_stuff_exchange/model/entity/post.dart';
 import 'package:old_stuff_exchange/repository/implement/post_repository_implement.dart';
 import 'package:old_stuff_exchange/view_model/provider/user_provider.dart';
 import 'package:old_stuff_exchange/view_model/service/service_storage.dart';
+import 'package:old_stuff_exchange/widgets/overlay/custom_overlay.dart';
 import 'package:provider/provider.dart';
 
 import '../../model/request/login_firebase_request.dart';
@@ -24,7 +25,7 @@ class SignInProvider with ChangeNotifier {
       final googleSignIn = GoogleSignIn();
       final googleUser = await googleSignIn.signIn();
       if (googleUser != null) {
-        context.loaderOverlay.show();
+        context.loaderOverlay.show(widget: const CustomOverlay(content: 'Đang đăng nhập...'));
         final googleAuth = await googleUser.authentication;
         if (googleAuth.idToken != null) {
           final userCredential = await _firebaseAuth.signInWithCredential(

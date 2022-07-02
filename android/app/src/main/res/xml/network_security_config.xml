@@ -1,0 +1,3 @@
+<domain-config cleartextTrafficPermitted="true">
+  <domain includeSubdomains="true">https://old-stuff-exchange.azurewebsites.net</domain>
+</domain-config>

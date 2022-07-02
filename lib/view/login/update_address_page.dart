@@ -1,9 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:old_stuff_exchange/config/constrant/asset_path.dart';
 import 'package:old_stuff_exchange/config/themes/appColors.dart';
 import 'package:old_stuff_exchange/config/themes/appStyle.dart';
 import 'package:old_stuff_exchange/config/themes/fonts.dart';
@@ -13,9 +10,9 @@ import 'package:old_stuff_exchange/model/entity/building.dart';
 import 'package:old_stuff_exchange/model/entity/user.dart';
 import 'package:old_stuff_exchange/repository/implement/apartment_repository_implement.dart';
 import 'package:old_stuff_exchange/repository/implement/building_repository_implement.dart';
-import 'package:old_stuff_exchange/repository/implement/user_repository_implement.dart';
 import 'package:old_stuff_exchange/view_model/provider/update_address_provider.dart';
 import 'package:old_stuff_exchange/view_model/provider/user_provider.dart';
+import 'package:old_stuff_exchange/widgets/overlay/custom_overlay.dart';
 import 'package:provider/provider.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
@@ -121,9 +118,15 @@ class _UpdateAddressPageState extends State<UpdateAddressPage> {
                                             ))
                                         .toList(),
                                     onChanged: (String? value) {
-                                      setState(() {
+                                      setState(() async {
+                                        context.loaderOverlay.show(
+                                            widget: const CustomOverlay(
+                                          content:
+                                              'Đang lấy dữ liệu của chung cư',
+                                        ));
                                         _selectedApartment = value ?? '';
-                                        getBuildings();
+                                        await getBuildings();
+                                        context.loaderOverlay.hide();
                                       });
                                     }),
                               ),

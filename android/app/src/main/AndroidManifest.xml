@@ -5,6 +5,8 @@
         android:label="old_stuff_exchange"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="io.flutter.network-policy"
+             android:resource="@xml/network_security_config"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

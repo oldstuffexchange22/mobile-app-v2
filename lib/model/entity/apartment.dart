@@ -13,10 +13,10 @@ class Apartment {
 
   factory Apartment.fromJson(Map<String, dynamic> json) => Apartment(
       id: json['id'],
-      name: json['name'],
-      description: json['description'],
-      address: json['address'],
-      imageUrl: json['imageUrl']);
+      name: json['name'] ?? '',
+      description: json['description'] ?? '',
+      address: json['address'] ?? '',
+      imageUrl: json['imageUrl'] ?? '');
 
   Map<String, dynamic> toJson() => {
         'id': id,

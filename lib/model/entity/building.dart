@@ -8,6 +8,6 @@ class Building {
   factory Building.fromJson(Map<String, dynamic> json) => Building(
       id: json['id'] ?? '',
       name: json['name'] ?? '',
-      description: json['description'],
-      apartmentId: json['apartmentId']);
+      description: json['description'] ?? '',
+      apartmentId: json['apartmentId'] ?? '');
 }

@@ -21,14 +21,14 @@ class Post {
 
   factory Post.fromJson(Map<String, dynamic> json) => Post(
       id: json['id'],
-      title: json['title'],
-      description: json['description'],
-      price: json['price'],
-      imageUrl: json['imageUrl'],
+      title: json['title'] ?? '',
+      description: json['description'] ?? '',
+      price: json['price'] ?? '',
+      imageUrl: json['imageUrl'] ?? '',
       createdAt: DateTime.parse(json['createdAt']),
-      userBought: json['userBought'],
-      authorId: json['authorId'],
-      status: json['status']);
+      userBought: json['userBought'] ?? '',
+      authorId: json['authorId'] ?? '',
+      status: json['status'] ?? '');
 
   Map<String, dynamic> toJson() => {
         'id': id,

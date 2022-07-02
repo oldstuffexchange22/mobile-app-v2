@@ -5,7 +5,7 @@ import 'package:old_stuff_exchange/view/login/update_address_page.dart';
 
 class Routes {
   static final Map<String, Widget Function(BuildContext)> routes = {
-    "/signInPage": (context) => SignInPage(),
+    "/signInPage": (context) => const SignInPage(),
     "/homePage": (context) => const HomePage(),
     "/updateAddressPage": (context) => const UpdateAddressPage()
   };

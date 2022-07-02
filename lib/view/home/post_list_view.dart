@@ -8,7 +8,6 @@ import 'package:old_stuff_exchange/config/themes/fonts.dart';
 import 'package:old_stuff_exchange/model/entity/post.dart';
 import 'package:old_stuff_exchange/repository/implement/post_repository_implement.dart';
 import 'package:old_stuff_exchange/view/common/post_list_item.dart';
-import 'package:old_stuff_exchange/view/home/appbar/home_appbar.dart';
 
 class PostListView extends StatefulWidget {
   const PostListView({Key? key}) : super(key: key);

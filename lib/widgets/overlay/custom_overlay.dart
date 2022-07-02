@@ -15,7 +15,6 @@ class CustomOverlay extends StatefulWidget {
 class _CustomOverlayState extends State<CustomOverlay> {
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,

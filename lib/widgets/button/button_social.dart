@@ -42,7 +42,7 @@ class ButtonSocial extends StatelessWidget {
               width: 16,
             ),
             Text(content,
-                style: PrimaryFont.regular(screenSize.width * 0.048)
+                style: PrimaryFont.regular(screenSize.width * 0.044)
                     .copyWith(color: kColorWhite)),
             Opacity(opacity: 0.0, child: Image.asset(assetName))
           ],

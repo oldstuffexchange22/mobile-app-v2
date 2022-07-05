@@ -116,7 +116,9 @@ class _BtnCreatePost extends StatelessWidget {
       height: screenSize.height * 0.2,
       child: FittedBox(
         child: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).pushNamed('/createPostPage');
+          },
           backgroundColor: Colors.blue,
           child: Column(
             children: [

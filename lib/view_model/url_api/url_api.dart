@@ -6,4 +6,5 @@ class UrlApi {
   static const String postController = '$serverPath/posts';
   static const String apartmentController = '$serverPath/apartments';
   static const String buildingController = '$serverPath/buildings';
+  static const String categoryController = '$serverPath/categories';
 }

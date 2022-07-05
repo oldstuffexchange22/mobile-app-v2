@@ -3,10 +3,16 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:jwt_decode/jwt_decode.dart';
+import 'package:old_stuff_exchange/config/toast/toast.dart';
 import 'package:old_stuff_exchange/model/entity/post.dart';
+import 'package:old_stuff_exchange/model/entity/product.dart';
+import 'package:old_stuff_exchange/model/request/post_create.dart';
+import 'package:old_stuff_exchange/model/request/product_create.dart';
 import 'package:old_stuff_exchange/repository/post_repository.dart';
+import 'package:old_stuff_exchange/utils/option_request.dart';
 import 'package:old_stuff_exchange/view_model/service/service_storage.dart';
 import 'package:old_stuff_exchange/view_model/url_api/url_api.dart';
+import 'package:uuid/uuid.dart';
 
 class PostRepImp implements PostRepository {
   final SecureStorage secureStorage = SecureStorage();
@@ -35,6 +41,23 @@ class PostRepImp implements PostRepository {
           (response.data['data'] as List).map((e) => Post.fromJson(e)).toList();
     } catch (e) {
       print(e);
+    }
+    return result;
+  }
+
+  @override
+  Future<Post?> create(CreatePost post) async {
+    Post? result;
+    try {
+      print(post.toJson());
+      Options optionRequest = await OptionRequest.optionAuthorize();
+      Response response = await Dio().post(UrlApi.postController,
+          data: post.toJson(), options: optionRequest);
+      result = Post.fromJson(response.data['data']);
+    } on DioError catch (e) {
+      showToastFail('Api create post error dio');
+    } catch (e) {
+      showToastFail('Api create post error');
     }
     return result;
   }

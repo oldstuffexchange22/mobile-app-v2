@@ -46,6 +46,12 @@ dependencies:
   jwt_decode: ^0.3.1
   loader_overlay: ^2.0.7
   infinite_scroll_pagination: ^3.2.0
+  firebase_storage: ^10.2.17
+  firebase_core_platform_interface: ^4.4.3
+  permission_handler: ^10.0.0
+  image_picker: ^0.8.5+3
+  uuid: ^3.0.6
+  
 
 dev_dependencies:
   flutter_test:

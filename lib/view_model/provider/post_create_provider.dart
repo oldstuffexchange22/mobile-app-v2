@@ -46,11 +46,10 @@ class PostProvider with ChangeNotifier {
     try {
       context.loaderOverlay.show(
           widget: const CustomOverlay(
-        content: 'Đang tạo bằng đăng',
+        content: 'Đang tạo bài đăng',
       ));
       final _storage = FirebaseStorage.instance;
       String postId = const Uuid().v1();
-      String downloadUrl = '';
       // apply post id to list product
       products = products.map(
         (e) {
@@ -69,10 +68,8 @@ class PostProvider with ChangeNotifier {
         //   String downloadLink = await element.getDownloadURL();
         //   print(downloadLink);
         // });
-        downloadUrl = await snapshot.ref.getDownloadURL();
       }
-      int indexConcat = downloadUrl.lastIndexOf('%2F');
-      String imageUrl = downloadUrl.substring(0, indexConcat);
+      String imageUrl = 'posts/$postId';
       CreatePost newPost = CreatePost(
           id: postId,
           title: title,
@@ -83,7 +80,7 @@ class PostProvider with ChangeNotifier {
       Post? post = await PostRepImp().create(newPost);
       if (post == null) {
         showToastFail('Create post fail');
-        context.loaderOverlay.hide();  
+        context.loaderOverlay.hide();
         return;
       }
       clearAllData();

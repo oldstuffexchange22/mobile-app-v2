@@ -154,7 +154,7 @@ class _CreatePostState extends State<CreatePost> {
                       ? const SizedBox()
                       : SizedBox(
                           width: screenSize.width * 0.84,
-                          child: LabelBox(label: 'Danh sách sản phẩm : ')),
+                          child:  const LabelBox(label: 'Danh sách sản phẩm : ')),
                   ClipRRect(
                     borderRadius: const BorderRadius.all(Radius.circular(16)),
                     child: Container(
@@ -346,8 +346,8 @@ class _CreatePostState extends State<CreatePost> {
 }
 
 class LabelBox extends StatelessWidget {
-  LabelBox({Key? key, required this.label}) : super(key: key);
-  String label;
+  const LabelBox({Key? key, required this.label}) : super(key: key);
+  final String label;
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;

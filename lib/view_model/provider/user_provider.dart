@@ -10,6 +10,8 @@ import 'package:old_stuff_exchange/view_model/service/service_storage.dart';
 class UserProvider with ChangeNotifier {
   User? _currentUser;
   User? get currentUser => _currentUser;
+  
+
   final SecureStorage secureStorage = SecureStorage();
   Future<void> getCurrentUser() async {
     String token = (await secureStorage.readSecureData('token')) ?? '';

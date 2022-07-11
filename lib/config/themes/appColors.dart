@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:old_stuff_exchange/utils/hex_color.dart';
 
 final kColorPrimary = HexColor('42a5f5');
@@ -10,3 +11,4 @@ final kColorBtnLogin = HexColor('6A74CF');
 final kColorBlue = HexColor('5073B5');
 final kColorBackGroundStart = HexColor('DEC4FC');
 final kColorBackGroundEnd = HexColor('91C6FC');
+final kColorBgPrimaryMaterial = MaterialStateProperty.all<Color>(kColorPrimary);

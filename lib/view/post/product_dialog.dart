@@ -72,25 +72,25 @@ class _ProductDialogState extends State<ProductDialog> {
                     },
                     child: const Icon(Icons.close))
               ]),
-              LabelBox(label: 'Tên sản phẩm :'),
+              const LabelBox(label: 'Tên sản phẩm :'),
               InputApp(
                   isRequired: true,
                   width: screenSize.width * 0.6,
                   icon: const Icon(Icons.description_outlined),
                   controller: _nameController),
-              LabelBox(label: 'Miêu tả :'),
+              const LabelBox(label: 'Miêu tả :'),
               InputApp(
                   isRequired: true,
                   width: screenSize.width * 0.6,
                   icon: const Icon(Icons.description_outlined),
                   controller: _descriptionController),
-              LabelBox(label: 'Giá :'),
+              const LabelBox(label: 'Giá :'),
               InputNumberApp(
                   isRequired: true,
                   width: screenSize.width * 0.6,
                   icon: const Icon(Icons.description_outlined),
                   controller: _priceController),
-              LabelBox(label: 'Loại :'),
+              const LabelBox(label: 'Loại :'),
               Container(
                 width: screenSize.width * 0.6,
                 decoration: BoxDecoration(
@@ -174,8 +174,8 @@ class _ProductDialogState extends State<ProductDialog> {
 }
 
 class LabelBox extends StatelessWidget {
-  LabelBox({Key? key, required this.label}) : super(key: key);
-  String label;
+  const LabelBox({Key? key, required this.label}) : super(key: key);
+  final String label;
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;

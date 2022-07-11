@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:old_stuff_exchange/config/themes/fonts.dart';
+import 'package:old_stuff_exchange/config/toast/toast.dart';
 import 'package:old_stuff_exchange/model/entity/post.dart';
+import 'package:old_stuff_exchange/view/post/detail_post.dart';
 
 class PostListItem extends StatelessWidget {
   const PostListItem({Key? key, required this.post}) : super(key: key);
@@ -31,6 +33,10 @@ class PostListItem extends StatelessWidget {
           )
         ],
       ),
+      onTap: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => PostDetail(post: post)));
+      },
     );
   }
 }

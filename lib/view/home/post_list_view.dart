@@ -23,9 +23,11 @@ class _PostListViewState extends State<PostListView> {
       PagingController(firstPageKey: 0);
   String _searchTerm = '';
   Timer _timer = Timer(const Duration(milliseconds: 0), () {});
+  TextEditingController searchController = TextEditingController();
 
   @override
   void initState() {
+    searchController.text = '';
     _pagingController.addPageRequestListener((pageKey) {
       _fetchPage(pageKey);
     });
@@ -51,15 +53,18 @@ class _PostListViewState extends State<PostListView> {
       appBar: AppBar(
         title: _titleSearch(screenSize),
       ),
-      body: CustomScrollView(
-        slivers: [
-          PagedSliverList(
-              pagingController: _pagingController,
-              builderDelegate: PagedChildBuilderDelegate<Post>(
-                  animateTransitions: true,
-                  itemBuilder: (context, item, index) =>
-                      PostListItem(post: item)))
-        ],
+      body: RefreshIndicator(
+        onRefresh: () => Future.sync(() => _pagingController.refresh()),
+        child: CustomScrollView(
+          slivers: [
+            PagedSliverList(
+                pagingController: _pagingController,
+                builderDelegate: PagedChildBuilderDelegate<Post>(
+                    animateTransitions: true,
+                    itemBuilder: (context, item, index) =>
+                        PostListItem(post: item)))
+          ],
+        ),
       ),
     );
   }
@@ -75,6 +80,7 @@ class _PostListViewState extends State<PostListView> {
       ),
       child: Center(
         child: TextField(
+          controller: searchController,
           onChanged: (value) {
             _timer.cancel();
             _timer = Timer(const Duration(milliseconds: 500), () {
@@ -90,6 +96,7 @@ class _PostListViewState extends State<PostListView> {
                 onPressed: () {
                   setState(() {
                     _updateSearchTerm('');
+                    searchController.clear();
                   });
                 },
                 icon: const Icon(Icons.clear)),

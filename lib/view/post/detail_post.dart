@@ -38,12 +38,9 @@ class _PostDetailState extends State<PostDetail> {
     SecureStorage secureStorage = SecureStorage();
     String token = await secureStorage.readSecureData('token');
     Map<String, dynamic> tokenDecode = Jwt.parseJwt(token);
-    String userId = tokenDecode['id'];
-    ListResult result = await storage
-        .ref()
-        .child('posts')
-        .child(userId)
-        .listAll();
+    String userId = widget.post.authorId;
+    ListResult result =
+        await storage.ref().child('posts').child(widget.post.id).listAll();
     result.items.forEach((element) async {
       String downloadLink = await element.getDownloadURL();
       final image = Image.network(
@@ -186,7 +183,7 @@ class _PostDetailState extends State<PostDetail> {
   Container _listProduct(List<Product> products) {
     return Container(
       color: Colors.transparent.withOpacity(0.08),
-      height: 40 * products.length.toDouble(),
+      height: 50 * products.length.toDouble(),
       child: Padding(
         padding: const EdgeInsets.all(12),
         child: ListView.builder(

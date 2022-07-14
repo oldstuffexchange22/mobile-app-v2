@@ -1,17 +1,14 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:old_stuff_exchange/config/themes/appColors.dart';
 import 'package:old_stuff_exchange/config/themes/fonts.dart';
-import 'package:old_stuff_exchange/view/home/manage_post_view/accomplished_post.dart';
-import 'package:old_stuff_exchange/view/home/manage_post_view/active_post.dart';
-import 'package:old_stuff_exchange/view/home/manage_post_view/delivered_post.dart';
-import 'package:old_stuff_exchange/view/home/manage_post_view/delivery_post.dart';
-import 'package:old_stuff_exchange/view/home/manage_post_view/failure_post.dart';
-import 'package:old_stuff_exchange/view/home/manage_post_view/inactive_post.dart';
-import 'package:old_stuff_exchange/view/home/manage_post_view/waiting_post.dart';
-import 'package:loader_overlay/loader_overlay.dart';
+import 'package:old_stuff_exchange/view/home/sale_post_view/accomplished_post.dart';
+import 'package:old_stuff_exchange/view/home/sale_post_view/active_post.dart';
+import 'package:old_stuff_exchange/view/home/sale_post_view/delivered_post.dart';
+import 'package:old_stuff_exchange/view/home/sale_post_view/delivery_post.dart';
+import 'package:old_stuff_exchange/view/home/sale_post_view/failure_post.dart';
+import 'package:old_stuff_exchange/view/home/sale_post_view/inactive_post.dart';
+import 'package:old_stuff_exchange/view/home/sale_post_view/waiting_post.dart';
 import 'package:old_stuff_exchange/view_model/provider/post_status_provider.dart';
-import 'package:old_stuff_exchange/widgets/overlay/custom_overlay.dart';
 import 'package:provider/provider.dart';
 
 class SalePostView extends StatefulWidget {

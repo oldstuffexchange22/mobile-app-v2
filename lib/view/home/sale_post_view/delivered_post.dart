@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:old_stuff_exchange/config/themes/fonts.dart';
@@ -5,20 +7,20 @@ import 'package:old_stuff_exchange/model/entity/post.dart';
 import 'package:old_stuff_exchange/view_model/provider/post_status_provider.dart';
 import 'package:provider/provider.dart';
 
-class AccomplishedPost extends StatefulWidget {
-  const AccomplishedPost({Key? key}) : super(key: key);
+class DeliveredPost extends StatefulWidget {
+  const DeliveredPost({Key? key}) : super(key: key);
 
   @override
-  State<AccomplishedPost> createState() => _AccomplishedPostState();
+  State<DeliveredPost> createState() => _DeliveredPostState();
 }
 
-class _AccomplishedPostState extends State<AccomplishedPost> {
+class _DeliveredPostState extends State<DeliveredPost> {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     PostStatusProvider postStatusProvider =
         Provider.of<PostStatusProvider>(context);
-    List<Post> posts = postStatusProvider.accomplishedPosts;
+    List<Post> posts = postStatusProvider.deliveredPosts;
     return Scaffold(
       body: SizedBox(
         height: screenSize.height,
@@ -65,14 +67,14 @@ class _AccomplishedPostState extends State<AccomplishedPost> {
                     height: 6,
                   ),
                   Text(
-                    'Giá : ${post.price}.000',
+                    'Giá : ${post.price}00',
                     style: PrimaryFont.regular(18).copyWith(color: Colors.red),
                   ),
                   const SizedBox(
                     height: 2,
                   ),
                   Text(
-                      'Ngày tạo : ${post.lastUpdatedAt.toLocal().toString().substring(0, 16)}')
+                      'Ngày tạo : ${post.lastUpdatedAt.add(const Duration(hours: 7)).toString().substring(0, 16)}')
                 ],
               ),
             );

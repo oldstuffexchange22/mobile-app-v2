@@ -42,6 +42,7 @@ class PostRepImp implements PostRepository {
           });
       result =
           (response.data['data'] as List).map((e) => Post.fromJson(e)).toList();
+      print(result);
     } catch (e) {
       print(e);
     }
@@ -75,7 +76,11 @@ class PostRepImp implements PostRepository {
       Response response = await Dio().get(
           '${UrlApi.postController}/user/$userId',
           options: optionRequest,
-          queryParameters: {"status": status, "pageSize": 30, "isOrderLastUpdate" : true});
+          queryParameters: {
+            "status": status,
+            "pageSize": 30,
+            "isOrderLastUpdate": true
+          });
       result =
           (response.data['data'] as List).map((e) => Post.fromJson(e)).toList();
     } on DioError catch (e) {
@@ -85,7 +90,7 @@ class PostRepImp implements PostRepository {
     }
     return result;
   }
-  
+
   @override
   Future<Post?> buy(String postId, String walletType) async {
     Post? result;
@@ -106,8 +111,9 @@ class PostRepImp implements PostRepository {
     }
     return result;
   }
+
   @override
-  Future<Post?> accomplished(String postId) async{
+  Future<Post?> accomplished(String postId) async {
     Post? result;
     try {
       Options optionRequest = await OptionRequest.optionAuthorize();
@@ -125,10 +131,10 @@ class PostRepImp implements PostRepository {
     }
     return result;
   }
-  
+
   @override
-  Future<Post?> delivered(String postId) async{
-     Post? result;
+  Future<Post?> delivered(String postId) async {
+    Post? result;
     try {
       Options optionRequest = await OptionRequest.optionAuthorize();
       Map<String, dynamic> dataRequest = {
@@ -145,10 +151,10 @@ class PostRepImp implements PostRepository {
     }
     return result;
   }
-  
+
   @override
-  Future<Post?> failure(String postId) async{
-     Post? result;
+  Future<Post?> failure(String postId) async {
+    Post? result;
     try {
       Options optionRequest = await OptionRequest.optionAuthorize();
       Map<String, dynamic> dataRequest = {

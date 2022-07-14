@@ -117,17 +117,16 @@ class _UpdateAddressPageState extends State<UpdateAddressPage> {
                                                   e.name.replaceAll('.', '')),
                                             ))
                                         .toList(),
-                                    onChanged: (String? value) {
-                                      setState(() async {
-                                        context.loaderOverlay.show(
-                                            widget: const CustomOverlay(
-                                          content:
-                                              'Đang lấy dữ liệu của chung cư',
-                                        ));
-                                        _selectedApartment = value ?? '';
-                                        await getBuildings();
-                                        context.loaderOverlay.hide();
-                                      });
+                                    onChanged: (String? value) async {
+                                      context.loaderOverlay.show(
+                                          widget: const CustomOverlay(
+                                        content:
+                                            'Đang lấy dữ liệu của chung cư',
+                                      ));
+                                      _selectedApartment = value ?? '';
+                                      await getBuildings();
+                                      context.loaderOverlay.hide();
+                                      setState(() {});
                                     }),
                               ),
                             ),

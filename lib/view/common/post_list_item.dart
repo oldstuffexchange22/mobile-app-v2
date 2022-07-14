@@ -42,14 +42,14 @@ class PostListItem extends StatelessWidget {
             height: 6,
           ),
           Text(
-            'Giá : ${post.price}.000',
+            'Giá : ${post.price}00',
             style: PrimaryFont.bold(18).copyWith(color: Colors.red),
           ),
           const SizedBox(
             height: 4,
           ),
           Text(
-            'Ngày tạo : ${post.createdAt.toLocal().toString().substring(0, 16)}',
+            'Ngày tạo : ${post.createdAt.add(const Duration(hours: 7)).toString().substring(0, 16)}',
             style: PrimaryFont.extraLight(12),
           ),
         ],

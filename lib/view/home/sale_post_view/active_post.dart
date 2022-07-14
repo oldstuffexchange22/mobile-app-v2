@@ -65,7 +65,7 @@ class _ActivePostState extends State<ActivePost> {
                           height: 6,
                         ),
                         Text(
-                          'Giá : ${post.price}.000',
+                          'Giá : ${post.price}00',
                           style: PrimaryFont.regular(18)
                               .copyWith(color: Colors.red),
                         ),
@@ -73,7 +73,7 @@ class _ActivePostState extends State<ActivePost> {
                           height: 2,
                         ),
                         Text(
-                            'Ngày tạo : ${post.lastUpdatedAt.toLocal().toString().substring(0, 16)}')
+                            'Ngày tạo : ${post.lastUpdatedAt.add(const Duration(hours: 7)).toString().substring(0, 16)}')
                       ],
                     ),
                   );

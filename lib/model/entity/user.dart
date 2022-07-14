@@ -8,21 +8,21 @@ class User {
       required this.userName,
       required this.fullName,
       required this.status,
-      required this.phone,
-      required this.gender,
+      this.phone,
+      this.gender,
       required this.email,
-      required this.imagesUrl,
-      required this.role,
+      this.imagesUrl,
+      this.role,
       this.building});
   String id;
   String userName;
   String fullName;
-  String status;
-  String phone;
-  String gender;
-  String email;
-  String imagesUrl;
-  Role role;
+  String? status;
+  String? phone;
+  String? gender;
+  String? email;
+  String? imagesUrl;
+  Role? role;
   Building? building;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
@@ -34,7 +34,7 @@ class User {
       gender: json['gender'] ?? '',
       email: json['email'] ?? '',
       imagesUrl: json['imagesUrl'] ?? '',
-      role: Role.fromJson(json['role']),
+      role: json['role'] != null ? Role.fromJson(json['role']) : null,
       building: json['building'] == null
           ? null
           : Building.fromJson(json['building']));
@@ -48,7 +48,7 @@ class User {
         'gender': gender,
         'email': email,
         'imagesUrl': imagesUrl,
-        'role': role.toJson(),
+        'role': role?.toJson(),
         'buildingId': building?.id
       };
 }

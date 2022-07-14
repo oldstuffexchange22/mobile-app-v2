@@ -2,6 +2,8 @@ import 'package:old_stuff_exchange/view/login/update_address_page.dart';
 import 'package:old_stuff_exchange/view_model/provider/aparment_provider.dart';
 import 'package:old_stuff_exchange/view_model/provider/building_provider.dart';
 import 'package:old_stuff_exchange/view_model/provider/post_create_provider.dart';
+import 'package:old_stuff_exchange/view_model/provider/post_payment_provider.dart';
+import 'package:old_stuff_exchange/view_model/provider/post_status_provider.dart';
 import 'package:old_stuff_exchange/view_model/provider/update_address_provider.dart';
 import 'package:old_stuff_exchange/view_model/provider/user_provider.dart';
 import 'package:provider/provider.dart';
@@ -23,6 +25,10 @@ class MainProviders {
         create: ((context) => BuildingProvider())),
     ChangeNotifierProvider<UpdateAddressProvider>(
         create: (context) => UpdateAddressProvider()),
-    ChangeNotifierProvider<PostProvider>(create: (context) => PostProvider())
+    ChangeNotifierProvider<PostProvider>(create: (context) => PostProvider()),
+    ChangeNotifierProvider<PostPaymentProvider>(
+        create: ((context) => PostPaymentProvider())),
+    ChangeNotifierProvider<PostStatusProvider>(
+        create: ((context) => PostStatusProvider()))
   ];
 }

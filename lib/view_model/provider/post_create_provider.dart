@@ -50,6 +50,7 @@ class PostProvider with ChangeNotifier {
       ));
       final _storage = FirebaseStorage.instance;
       String postId = const Uuid().v1();
+      List<String> imagesUrl = [];
       // apply post id to list product
       products = products.map(
         (e) {
@@ -68,8 +69,10 @@ class PostProvider with ChangeNotifier {
         //   String downloadLink = await element.getDownloadURL();
         //   print(downloadLink);
         // });
+        String downloadLink = await snapshot.ref.getDownloadURL();
+        imagesUrl.add(downloadLink);
       }
-      String imageUrl = 'posts/$postId';
+      String imageUrl = imagesUrl[0];
       CreatePost newPost = CreatePost(
           id: postId,
           title: title,

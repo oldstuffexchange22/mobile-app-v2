@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:old_stuff_exchange/config/themes/fonts.dart';
 
@@ -13,7 +11,7 @@ class ManagePostAppBarContainer extends StatelessWidget {
     return Align(
       alignment: Alignment.center,
       child: Text(
-        'Quản lí tin',
+        'Bài bán',
         style: PrimaryFont.extraLight(22),
       ),
     );

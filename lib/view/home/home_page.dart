@@ -8,8 +8,8 @@ import 'package:old_stuff_exchange/view/home/appbar/home_appbar.dart';
 import 'package:old_stuff_exchange/view/home/appbar/manage_post_appbar.dart';
 import 'package:old_stuff_exchange/view/home/appbar/notify_appbar.dart';
 import 'package:old_stuff_exchange/view/home/extend_info_view.dart';
-import 'package:old_stuff_exchange/view/home/manage_post_view.dart';
-import 'package:old_stuff_exchange/view/home/notify_view.dart';
+import 'package:old_stuff_exchange/view/home/sale_post_view.dart';
+import 'package:old_stuff_exchange/view/home/bought_post_view.dart';
 import 'package:old_stuff_exchange/view/home/post_list_view.dart';
 import 'package:old_stuff_exchange/view_model/provider/user_provider.dart';
 import 'package:provider/provider.dart';
@@ -35,16 +35,16 @@ class _HomePageState extends State<HomePage> {
       widgetBuilder: (context) => const PostListView(),
     ),
     _BottomNavigationItem(
-      label: 'Quản lí tin',
+      label: 'Bài bán',
       icon: Icons.document_scanner_outlined,
       activeIcon: Icons.document_scanner,
-      widgetBuilder: (context) => const ManagePostView(),
+      widgetBuilder: (context) => const SalePostView(),
     ),
     _BottomNavigationItem(
-      label: 'Thông báo',
-      icon: Icons.notifications_outlined,
-      activeIcon: Icons.notifications,
-      widgetBuilder: (context) => const NotifyView(),
+      label: 'Bài mua',
+      icon: Icons.sell_outlined,
+      activeIcon: Icons.sell,
+      widgetBuilder: (context) => const BoughtPostView(),
     ),
     _BottomNavigationItem(
       label: 'Thêm',
@@ -59,13 +59,12 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     UserProvider userProvider =
         Provider.of<UserProvider>(context, listen: false);
-    // userProvider.getCurrentUser();
+    userProvider.getCurrentUser();
+    userProvider.getWalletOfUser();
   }
 
   @override
   Widget build(BuildContext context) {
-    UserProvider userProvider = Provider.of<UserProvider>(context);
-    // userProvider.getCurrentUser();
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
       body: IndexedStack(

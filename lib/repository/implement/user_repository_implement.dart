@@ -22,7 +22,6 @@ class UserRepImp implements UserRepository {
       user = User.fromJson(response.data['data']);
     } catch (e) {
       showToastFail('Some thing went wrong call api get user id');
-      print(e);
     }
     return user;
   }

@@ -12,8 +12,22 @@ class PostListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+
     return ListTile(
-      leading: const Icon(Icons.post_add_outlined),
+      leading: Padding(
+        padding: const EdgeInsets.only(top: 10),
+        child: SizedBox(
+          width: screenSize.width * 0.16,
+          height: screenSize.height * 0.14,
+          child: FittedBox(
+            fit: BoxFit.fill,
+            child: post.imageUrl.isEmpty
+                ? const Icon(Icons.image_aspect_ratio_outlined)
+                : Image.network(post.imageUrl),
+          ),
+        ),
+      ),
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -30,7 +44,14 @@ class PostListItem extends StatelessWidget {
           Text(
             'Giá : ${post.price}.000',
             style: PrimaryFont.bold(18).copyWith(color: Colors.red),
-          )
+          ),
+          const SizedBox(
+            height: 4,
+          ),
+          Text(
+            'Ngày tạo : ${post.createdAt.toLocal().toString().substring(0, 16)}',
+            style: PrimaryFont.extraLight(12),
+          ),
         ],
       ),
       onTap: () {

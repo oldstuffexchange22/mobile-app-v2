@@ -32,9 +32,6 @@ class _CreatePostState extends State<CreatePost> {
   void initState() {
     PostProvider postProvider =
         Provider.of<PostProvider>(context, listen: false);
-    UserProvider userProvider =
-        Provider.of<UserProvider>(context, listen: false);
-    userProvider.getCurrentUser();
     postProvider.getCategories();
     super.initState();
   }
@@ -85,13 +82,13 @@ class _CreatePostState extends State<CreatePost> {
                   const SizedBox(
                     height: 10,
                   ),
-                  LabelBox(label: 'Tiêu đề :'),
+                  const LabelBox(label: 'Tiêu đề :'),
                   InputApp(
                       isRequired: true,
                       width: screenSize.width * 0.8,
                       icon: const Icon(Icons.title_outlined),
                       controller: _titleController),
-                  LabelBox(label: 'Miêu tả :'),
+                  const LabelBox(label: 'Miêu tả :'),
                   const SizedBox(
                     height: 8,
                   ),
@@ -154,7 +151,8 @@ class _CreatePostState extends State<CreatePost> {
                       ? const SizedBox()
                       : SizedBox(
                           width: screenSize.width * 0.84,
-                          child:  const LabelBox(label: 'Danh sách sản phẩm : ')),
+                          child:
+                              const LabelBox(label: 'Danh sách sản phẩm : ')),
                   ClipRRect(
                     borderRadius: const BorderRadius.all(Radius.circular(16)),
                     child: Container(

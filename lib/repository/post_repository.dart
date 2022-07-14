@@ -6,4 +6,12 @@ abstract class PostRepository {
       String? filterWith, String? filterValue, String? categoryId);
 
   Future<Post?> create(CreatePost post);
+
+  Future<Post?> buy(String postId, String walletType);
+
+  Future<Post?> delivered(String postId);
+  Future<Post?> accomplished(String postId);
+  Future<Post?> failure(String postId);
+
+  Future<List<Post>> getPostStatus(String status);
 }

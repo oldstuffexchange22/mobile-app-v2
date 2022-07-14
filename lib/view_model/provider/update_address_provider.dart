@@ -63,7 +63,7 @@ class UpdateAddressProvider with ChangeNotifier {
     if (user.id.isEmpty) {
       showToastFail('Không thể cập nhật địa chỉ');
     } else {
-       Navigator.of(context).pushAndRemoveUntil(
+      Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => const HomePage()),
           (Route route) => false);
     }

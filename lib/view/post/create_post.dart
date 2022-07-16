@@ -35,7 +35,10 @@ class _CreatePostState extends State<CreatePost> {
     postProvider.getCategories();
     super.initState();
   }
-
+  @override
+  void dispose() {
+    super.dispose();
+  }
   final _storage = FirebaseStorage.instance;
   final _picker = ImagePicker();
   dynamic _pickImageError;

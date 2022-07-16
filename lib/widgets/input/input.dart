@@ -16,7 +16,6 @@ class InputApp extends StatelessWidget {
       this.isRequired,
       required this.controller})
       : super(key: key);
-
   final Icon icon;
   final String? label;
   final TextEditingController controller;

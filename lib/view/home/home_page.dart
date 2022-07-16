@@ -11,6 +11,7 @@ import 'package:old_stuff_exchange/view/home/extend_info_view.dart';
 import 'package:old_stuff_exchange/view/home/sale_post_view.dart';
 import 'package:old_stuff_exchange/view/home/bought_post_view.dart';
 import 'package:old_stuff_exchange/view/home/post_list_view.dart';
+import 'package:old_stuff_exchange/view_model/provider/home_page_provider.dart';
 import 'package:old_stuff_exchange/view_model/provider/user_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -66,9 +67,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
+    HomePageProvider homePageProvider = Provider.of<HomePageProvider>(context);
+    int selectedBottomIndex = homePageProvider.selectedPageIndex;
     return Scaffold(
       body: IndexedStack(
-        index: _selectedBottomNavigationIndex,
+        index: selectedBottomIndex,
         children: _bottomNavigationItems
             .map(
               (item) => item.widgetBuilder(context),
@@ -77,7 +80,7 @@ class _HomePageState extends State<HomePage> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        currentIndex: _selectedBottomNavigationIndex,
+        currentIndex: selectedBottomIndex,
         iconSize: 32,
         unselectedLabelStyle:
             PrimaryFont.extraLight(12).copyWith(color: kColorText),
@@ -91,7 +94,9 @@ class _HomePageState extends State<HomePage> {
             )
             .toList(),
         onTap: (newIndex) => setState(
-          () => _selectedBottomNavigationIndex = newIndex,
+          () {
+            homePageProvider.selectedPageIndex = newIndex;
+          },
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,

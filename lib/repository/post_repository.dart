@@ -12,6 +12,8 @@ abstract class PostRepository {
   Future<Post?> delivered(String postId);
   Future<Post?> accomplished(String postId);
   Future<Post?> failure(String postId);
+  Future<Post?> inactive(String postId);
 
   Future<List<Post>> getPostStatus(String status);
+  Future<List<Post>> getPostUserBoughtStatus(String status);
 }

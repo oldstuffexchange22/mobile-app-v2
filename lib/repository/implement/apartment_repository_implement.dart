@@ -23,7 +23,7 @@ class ApartmentReqImp implements ApartmentRep {
           .map((item) => Apartment.fromJson(item))
           .toList();
     } catch (e) {
-      showToastFail('Some thing went wrong when call apartment');
+      showToastFail('Some thing went wrong when call apartment $e');
     }
     return result;
   }

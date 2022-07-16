@@ -21,7 +21,7 @@ class UserRepImp implements UserRepository {
           .get('${UrlApi.userController}/$id', options: optionsRequest);
       user = User.fromJson(response.data['data']);
     } catch (e) {
-      showToastFail('Some thing went wrong call api get user id');
+      showToastFail('Some thing went wrong call api get user id $e');
     }
     return user;
   }
@@ -38,7 +38,7 @@ class UserRepImp implements UserRepository {
       await secureStorage.writeSecureData(
           'apartmentId', user.building?.apartmentId ?? '');
     } on DioError catch (e) {
-      showToastFail('Some thing went wrong call api user');
+      showToastFail('Some thing went wrong call api user $e');
     }
     return user;
   }

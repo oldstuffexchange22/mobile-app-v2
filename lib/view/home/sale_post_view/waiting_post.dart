@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:old_stuff_exchange/config/themes/fonts.dart';
 import 'package:old_stuff_exchange/model/entity/post.dart';
-import 'package:old_stuff_exchange/view_model/provider/post_status_provider.dart';
+import 'package:old_stuff_exchange/view_model/provider/post_sale_provider.dart';
+import 'package:old_stuff_exchange/widgets/center_refresh/center_refresh.dart';
 import 'package:provider/provider.dart';
 
 class WaitingPost extends StatefulWidget {
@@ -13,19 +16,41 @@ class WaitingPost extends StatefulWidget {
 }
 
 class _WaitingPostState extends State<WaitingPost> {
+  late Widget emptyWidget;
+  late Timer _timer;
+  @override
+  void initState() {
+    PostSaleProvider postSaleProvider =
+        Provider.of<PostSaleProvider>(context, listen: false);
+    postSaleProvider.getPostWaiting();
+    emptyWidget = const CenterRefresh();
+    _timer = Timer(const Duration(milliseconds: 10000), () {
+      if (postSaleProvider.waitingPosts.isEmpty) {
+        setState(() {
+          emptyWidget = const CenterNotifyEmpty();
+        });
+      }
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    PostStatusProvider postStatusProvider =
-        Provider.of<PostStatusProvider>(context);
+    PostSaleProvider postStatusProvider =
+        Provider.of<PostSaleProvider>(context);
     List<Post> posts = postStatusProvider.waitingPosts;
     return Scaffold(
-      body: SizedBox(
-        height: screenSize.height,
+      body: RefreshIndicator(
+        onRefresh: () => postStatusProvider.getPostWaiting(),
         child: posts.isEmpty
-            ? const Center(
-                child: CircularProgressIndicator(),
-              )
+            ? Center(child: emptyWidget)
             : ListView.builder(
                 itemBuilder: ((context, i) {
                   Post post = posts[i];
@@ -64,10 +89,24 @@ class _WaitingPostState extends State<WaitingPost> {
                         const SizedBox(
                           height: 6,
                         ),
-                        Text(
-                          'Giá : ${post.price}00',
-                          style: PrimaryFont.regular(18)
-                              .copyWith(color: Colors.red),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Giá : ${post.price}00',
+                              style: PrimaryFont.regular(18)
+                                  .copyWith(color: Colors.red),
+                            ),
+                            ElevatedButton(
+                                style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Colors.red)),
+                                onPressed: () async {
+                                  await _showConfirmDialog(post);
+                                },
+                                child: const Text('Hủy bài viết'))
+                          ],
                         ),
                         const SizedBox(
                           height: 2,
@@ -82,5 +121,42 @@ class _WaitingPostState extends State<WaitingPost> {
               ),
       ),
     );
+  }
+
+  Future<void> _showConfirmDialog(Post post) async {
+    return showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (context) {
+          PostSaleProvider postStatusProvider =
+              Provider.of<PostSaleProvider>(context);
+          return AlertDialog(
+            title: const Text('Xác nhận'),
+            content: const SingleChildScrollView(
+              child: Text('Bạn chắc chắn muốn hủy đơn hàng này?'),
+            ),
+            actions: [
+              ElevatedButton(
+                onPressed: () async {
+                  await postStatusProvider.inactivePost(context, post.id);
+                  Navigator.of(context).pop();
+                },
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.green)),
+                child: const Text('Xác nhận'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.red)),
+                child: const Text('Thoát'),
+              )
+            ],
+          );
+        });
   }
 }

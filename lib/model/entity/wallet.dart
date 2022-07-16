@@ -16,13 +16,13 @@ class Wallet {
   String userId;
 
   factory Wallet.fromJson(Map<String, dynamic> json) => Wallet(
-      id: json['id'],
-      balance: json['balance'],
-      type: json['type'],
-      currency: json['currency'],
-      status: json['status'],
-      description: json['description'],
-      userId: json['userId']);
+      id: json['id'] ?? '',
+      balance: json['balance'] ?? 0,
+      type: json['type'] ?? '',
+      currency: json['currency'] ?? '',
+      status: json['status'] ?? '',
+      description: json['description'] ?? '',
+      userId: json['userId'] ?? '');
 
   Map<String, dynamic> toJson() => {
         'id': id,

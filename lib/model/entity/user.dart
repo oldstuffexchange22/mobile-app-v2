@@ -33,7 +33,7 @@ class User {
       phone: json['phone'] ?? '',
       gender: json['gender'] ?? '',
       email: json['email'] ?? '',
-      imagesUrl: json['imagesUrl'] ?? '',
+      imagesUrl: json['imageUrl'] ?? '',
       role: json['role'] != null ? Role.fromJson(json['role']) : null,
       building: json['building'] == null
           ? null
@@ -47,7 +47,7 @@ class User {
         'phone': phone,
         'gender': gender,
         'email': email,
-        'imagesUrl': imagesUrl,
+        'imageUrl': imagesUrl,
         'role': role?.toJson(),
         'buildingId': building?.id
       };

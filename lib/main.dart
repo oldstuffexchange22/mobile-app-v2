@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
               primarySwatch: Colors.purple,
               fontFamily: "Blinker",
             ),
-            initialRoute: "/signInPage",
+            initialRoute: "/rechargeMoneyPage",
             routes: Routes.routes),
       ),
     );

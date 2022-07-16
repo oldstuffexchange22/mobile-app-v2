@@ -22,8 +22,8 @@ class BuildingRepImp implements BuildingRep {
       result = (response.data['data'] as List)
           .map((e) => Building.fromJson(e))
           .toList();
-    } catch (_) {
-      showToastFail('Some went wrong when call api building');
+    } catch (e) {
+      showToastFail('Some went wrong when call api building $e');
     }
     return result;
   }

@@ -33,18 +33,19 @@ class UserProvider with ChangeNotifier {
         UserRepImp().getUserById(userId).then((value) => _currentUser = value);
       });
     } else {
-      UserRepImp().getUserById(userId).then((value) => _currentUser = value);
+      _currentUser = await UserRepImp().getUserById(userId);
     }
     notifyListeners();
   }
 
-  Future<void> getWalletOfUser() async{
+  Future<void> getWalletOfUser() async {
     String token = (await secureStorage.readSecureData('token')) ?? '';
     Map<String, dynamic> tokenDecode = Jwt.parseJwt(token);
     String userId = tokenDecode['id'];
     List<Wallet> wallets = await WalletReqImp().getWalletsByUserId(userId);
     _defaultWallet = wallets.firstWhere((w) => w.type == WalletType.basic);
-    _promotionWallet = wallets.firstWhere((w) => w.type == WalletType.promotion);
+    _promotionWallet =
+        wallets.firstWhere((w) => w.type == WalletType.promotion);
     notifyListeners();
   }
 

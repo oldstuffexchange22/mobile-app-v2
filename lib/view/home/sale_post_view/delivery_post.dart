@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:old_stuff_exchange/config/themes/fonts.dart';
 import 'package:old_stuff_exchange/model/entity/post.dart';
-import 'package:old_stuff_exchange/view_model/provider/post_status_provider.dart';
+import 'package:old_stuff_exchange/view_model/provider/post_sale_provider.dart';
+import 'package:old_stuff_exchange/widgets/center_refresh/center_refresh.dart';
 import 'package:provider/provider.dart';
 
 class DeliveryPost extends StatefulWidget {
@@ -13,19 +16,41 @@ class DeliveryPost extends StatefulWidget {
 }
 
 class _DeliveryPostState extends State<DeliveryPost> {
+  late Widget emptyWidget;
+  late Timer _timer;
+  @override
+  void initState() {
+    PostSaleProvider postSaleProvider =
+        Provider.of<PostSaleProvider>(context, listen: false);
+    postSaleProvider.getPostDelivery();
+    emptyWidget = const CenterRefresh();
+    _timer = Timer(const Duration(milliseconds: 10000), () {
+      if (postSaleProvider.deliveryPosts.isEmpty) {
+        setState(() {
+          emptyWidget = const CenterNotifyEmpty();
+        });
+      }
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    PostStatusProvider postStatusProvider =
-        Provider.of<PostStatusProvider>(context);
+    PostSaleProvider postStatusProvider =
+        Provider.of<PostSaleProvider>(context);
     List<Post> posts = postStatusProvider.deliveryPosts;
     return Scaffold(
-      body: SizedBox(
-        height: screenSize.height,
+      body: RefreshIndicator(
+        onRefresh: () => postStatusProvider.getPostDelivery(),
         child: posts.isEmpty
-            ? const Center(
-                child: CircularProgressIndicator(),
-              )
+            ? Center(child: emptyWidget)
             : ListView.builder(
                 itemBuilder: ((context, i) {
                   Post post = posts[i];
@@ -103,7 +128,8 @@ class _DeliveryPostState extends State<DeliveryPost> {
         barrierDismissible: false,
         context: context,
         builder: (context) {
-          PostStatusProvider postStatusProvider = Provider.of(context);
+          PostSaleProvider postStatusProvider =
+              Provider.of<PostSaleProvider>(context);
           return AlertDialog(
             title: const Text('Xác nhận'),
             content: const SingleChildScrollView(

@@ -58,9 +58,9 @@ class PostRepImp implements PostRepository {
           data: post.toJson(), options: optionRequest);
       result = Post.fromJson(response.data['data']);
     } on DioError catch (e) {
-      showToastFail('Api create post error dio');
+      showToastFail('Api create post error dio $e');
     } catch (e) {
-      showToastFail('Api create post error');
+      showToastFail('Api create post error $e');
     }
     return result;
   }
@@ -160,6 +160,51 @@ class PostRepImp implements PostRepository {
       Map<String, dynamic> dataRequest = {
         "postId": postId,
         "status": PostStatus.FAILURE
+      };
+      Response response = await Dio().put('${UrlApi.postController}/status',
+          options: optionRequest, data: dataRequest);
+      result = Post.fromJson(response.data['data']);
+    } on DioError catch (e) {
+      showToastFail('Api buy post error dio$e');
+    } catch (e) {
+      showToastFail('Api buy post error$e');
+    }
+    return result;
+  }
+  
+  @override
+  Future<List<Post>> getPostUserBoughtStatus(String status) async{
+    List<Post> result = [];
+    try {
+      String token = await secureStorage.readSecureData('token');
+      Map<String, dynamic> tokenDecode = Jwt.parseJwt(token);
+      String userId = tokenDecode['id'];
+      Options optionRequest = await OptionRequest.optionAuthorize();
+      Response response = await Dio().get(
+          '${UrlApi.postController}/userBought/$userId',
+          options: optionRequest,
+          queryParameters: {
+            "status": status,
+            "pageSize": 30,
+          });
+      result =
+          (response.data['data'] as List).map((e) => Post.fromJson(e)).toList();
+    } on DioError catch (e) {
+      showToastFail('Api get status post$e');
+    } catch (e) {
+      showToastFail('Api get status post$e');
+    }
+    return result;
+  }
+  
+  @override
+  Future<Post?> inactive(String postId) async{
+    Post? result;
+    try {
+      Options optionRequest = await OptionRequest.optionAuthorize();
+      Map<String, dynamic> dataRequest = {
+        "postId": postId,
+        "status": PostStatus.INACTIVE
       };
       Response response = await Dio().put('${UrlApi.postController}/status',
           options: optionRequest, data: dataRequest);

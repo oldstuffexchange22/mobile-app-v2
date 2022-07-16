@@ -25,8 +25,11 @@ class SignInProvider with ChangeNotifier {
       final googleSignIn = GoogleSignIn();
       final googleUser = await googleSignIn.signIn();
       if (googleUser != null) {
-        context.loaderOverlay.show(widget: const CustomOverlay(content: 'Đang đăng nhập...'));
+        context.loaderOverlay
+            .show(widget: const CustomOverlay(content: 'Đang đăng nhập...'));
         final googleAuth = await googleUser.authentication;
+        String? urlPhoto = googleUser.photoUrl;
+        String? displayName = googleUser.displayName;
         if (googleAuth.idToken != null) {
           final userCredential = await _firebaseAuth.signInWithCredential(
               GoogleAuthProvider.credential(
@@ -41,7 +44,9 @@ class SignInProvider with ChangeNotifier {
                 .then((value) async {
               final navigator = Navigator.of(context);
               await secureStorage.writeSecureData('token', value.token ?? '');
-
+              await secureStorage.writeSecureData('photoUrl', urlPhoto ?? '');
+              await secureStorage.writeSecureData(
+                  'displayName', displayName ?? '');
               Map<String, dynamic> tokenDecode =
                   Jwt.parseJwt(value.token ?? '');
               String apartmentId = tokenDecode['apartmentId'];

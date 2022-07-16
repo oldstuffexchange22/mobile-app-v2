@@ -8,7 +8,7 @@ import 'package:old_stuff_exchange/view/home/sale_post_view/delivery_post.dart';
 import 'package:old_stuff_exchange/view/home/sale_post_view/failure_post.dart';
 import 'package:old_stuff_exchange/view/home/sale_post_view/inactive_post.dart';
 import 'package:old_stuff_exchange/view/home/sale_post_view/waiting_post.dart';
-import 'package:old_stuff_exchange/view_model/provider/post_status_provider.dart';
+import 'package:old_stuff_exchange/view_model/provider/post_sale_provider.dart';
 import 'package:provider/provider.dart';
 
 class SalePostView extends StatefulWidget {
@@ -42,12 +42,12 @@ class _SalePostViewState extends State<SalePostView>
     super.initState();
     loadData();
     _tabController = TabController(length: 7, vsync: this);
-    _tabController.animateTo(2);
+    _tabController.animateTo(3);
   }
 
   Future<void> loadData() async {
-    PostStatusProvider postStatusProvider =
-        Provider.of<PostStatusProvider>(context, listen: false);
+    PostSaleProvider postStatusProvider =
+        Provider.of<PostSaleProvider>(context, listen: false);
     await postStatusProvider.getAllPostStatus();
     setState(() {});
   }

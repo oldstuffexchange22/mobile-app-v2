@@ -18,9 +18,9 @@ class WalletReqImp implements WalletReq {
           .map((e) => Wallet.fromJson(e))
           .toList();
     } on DioError catch (ex) {
-      showToastFail(ex.toString());
+      showToastFail('Wallet api error $ex');
     } catch (ex) {
-      showToastFail(ex.toString());
+      showToastFail('Wallet api error $ex');
     }
     return result;
   }

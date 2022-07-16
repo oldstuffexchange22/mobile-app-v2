@@ -20,9 +20,9 @@ class CategoryReqImp implements CategoryReq {
           .map((e) => Category.fromJson(e))
           .toList();
     } on DioError catch (e) {
-      showToastFail('Can\'t load categories');
+      showToastFail('Can\'t load categories $e');
     } catch (e) {
-      print(e);
+      showToastFail('Can\'t load categories $e');
     }
     return result;
   }

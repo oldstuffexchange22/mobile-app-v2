@@ -49,7 +49,15 @@ class _SalePostViewState extends State<SalePostView>
     PostSaleProvider postStatusProvider =
         Provider.of<PostSaleProvider>(context, listen: false);
     await postStatusProvider.getAllPostStatus();
-    setState(() {});
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
   }
 
   @override

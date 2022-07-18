@@ -24,7 +24,7 @@ class _FailureBoughtPostState extends State<FailureBoughtPost> {
         Provider.of<PostBoughtProvider>(context, listen: false);
     postSaleProvider.getFailurePost();
     emptyWidget = const CenterRefresh();
-    _timer = Timer(const Duration(milliseconds: 10000), () {
+    _timer = Timer(const Duration(milliseconds: 7000), () {
       if (postSaleProvider.failurePosts.isEmpty) {
         setState(() {
           emptyWidget = const CenterNotifyEmpty();
@@ -54,7 +54,11 @@ class _FailureBoughtPostState extends State<FailureBoughtPost> {
             : ListView.builder(
                 itemBuilder: ((context, i) {
                   Post post = posts[i];
+                  Color titleColor = i % 2 == 0
+                      ? Colors.white
+                      : Colors.black.withOpacity(0.04);
                   return ListTile(
+                    tileColor: titleColor,
                     leading: Padding(
                       padding: const EdgeInsets.only(top: 10),
                       child: SizedBox(
@@ -72,7 +76,7 @@ class _FailureBoughtPostState extends State<FailureBoughtPost> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(
-                          height: 16,
+                          height: 8,
                         ),
                         Text(
                           post.title,
@@ -90,7 +94,7 @@ class _FailureBoughtPostState extends State<FailureBoughtPost> {
                           height: 6,
                         ),
                         Text(
-                          'Giá : ${post.price}00',
+                          'Giá : ${post.price}00đ',
                           style: PrimaryFont.regular(18)
                               .copyWith(color: Colors.red),
                         ),
@@ -98,7 +102,10 @@ class _FailureBoughtPostState extends State<FailureBoughtPost> {
                           height: 2,
                         ),
                         Text(
-                            'Ngày tạo : ${post.lastUpdatedAt.add(const Duration(hours: 7)).toString().substring(0, 16)}')
+                            'Ngày tạo : ${post.lastUpdatedAt.add(const Duration(hours: 7)).toString().substring(0, 16)}'),
+                        const SizedBox(
+                          height: 8,
+                        ),
                       ],
                     ),
                   );

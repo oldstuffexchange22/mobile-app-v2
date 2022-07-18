@@ -8,4 +8,6 @@ class UrlApi {
   static const String buildingController = '$serverPath/buildings';
   static const String categoryController = '$serverPath/categories';
   static const String walletController = '$serverPath/wallets';
+  static const String depositController = '$serverPath/deposits';
+  static const String transactionController = '$serverPath/transactions';
 }

@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:old_stuff_exchange/config/constrant/post_status.dart';
 import 'package:old_stuff_exchange/config/toast/toast.dart';
 import 'package:old_stuff_exchange/model/entity/post.dart';
+import 'package:old_stuff_exchange/model/entity/user.dart';
 import 'package:old_stuff_exchange/repository/implement/post_repository_implement.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:old_stuff_exchange/repository/implement/user_repository_implement.dart';
 import 'package:old_stuff_exchange/widgets/overlay/custom_overlay.dart';
 
 class PostSaleProvider with ChangeNotifier {
@@ -69,6 +71,17 @@ class PostSaleProvider with ChangeNotifier {
   Future<void> getPostDelivery() async {
     try {
       _deliveryPosts = await PostRepImp().getPostStatus(PostStatus.DELIVERY);
+      // int count = 0;
+      // _deliveredPosts.forEach((element) async {
+      //   User? userBuyer = await UserRepImp().getUserById(element.userBought);
+      //   _deliveredPosts[count].userBoughtObject = userBuyer;
+      //   count++;
+      // });
+      // for (var post in _deliveredPosts) {
+      //   User? userBuyer = await UserRepImp().getUserById(post.userBought);
+      //   _deliveredPosts[count].userBoughtObject = userBuyer;
+      //   count++;
+      // }
       notifyListeners();
     } catch (e) {
       showToastFail('Error provider post status $e');
@@ -86,7 +99,8 @@ class PostSaleProvider with ChangeNotifier {
 
   Future<void> getPostAccomplished() async {
     try {
-      _accomplishedPosts = await PostRepImp().getPostStatus(PostStatus.ACCOMPLISHED);
+      _accomplishedPosts =
+          await PostRepImp().getPostStatus(PostStatus.ACCOMPLISHED);
       notifyListeners();
     } catch (e) {
       showToastFail('Error provider post status $e');

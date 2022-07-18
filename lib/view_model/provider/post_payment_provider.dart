@@ -21,7 +21,7 @@ class PostPaymentProvider with ChangeNotifier {
       if (post == null) {
         showToastFail('Thanh toán thất bại');
       } else {
-        showToastFail('Thanh toán thành công');
+        showToastSuccess('Thanh toán thành công');
         context.loaderOverlay.hide();
         // ignore: use_build_context_synchronously
         Navigator.of(context)

@@ -35,10 +35,12 @@ class _CreatePostState extends State<CreatePost> {
     postProvider.getCategories();
     super.initState();
   }
+
   @override
   void dispose() {
     super.dispose();
   }
+
   final _storage = FirebaseStorage.instance;
   final _picker = ImagePicker();
   dynamic _pickImageError;
@@ -54,12 +56,11 @@ class _CreatePostState extends State<CreatePost> {
     UserProvider userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Align(
-            alignment: Alignment.center,
-            child: Text(
-              'Tạo bài đăng',
-              style: PrimaryFont.semiBold(18).copyWith(color: Colors.white),
-            )),
+        centerTitle: true,
+        title: Text(
+          'Tạo bài đăng',
+          style: PrimaryFont.semiBold(18).copyWith(color: Colors.white),
+        ),
         flexibleSpace: Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(

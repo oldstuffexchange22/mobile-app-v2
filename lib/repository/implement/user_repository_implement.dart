@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:old_stuff_exchange/config/toast/toast.dart';
 import 'package:old_stuff_exchange/model/entity/user.dart';
+import 'package:old_stuff_exchange/model/request/user_update.dart';
 import 'package:old_stuff_exchange/repository/user_repository.dart';
 import 'package:old_stuff_exchange/utils/option_request.dart';
 import 'package:old_stuff_exchange/view_model/service/service_storage.dart';
@@ -41,5 +42,20 @@ class UserRepImp implements UserRepository {
       showToastFail('Some thing went wrong call api user $e');
     }
     return user;
+  }
+
+  @override
+  Future<User> updateUser(UserUpdate user) async {
+    late User result;
+    try {
+      Options optionRequest = await OptionRequest.optionAuthorize();
+      Map<String, dynamic> dataRequest = user.toJson();
+      Response response = await Dio().put(UrlApi.userController,
+          options: optionRequest, data: dataRequest);
+      result = User.fromJson(response.data['data']);
+    } catch (e) {
+      showToastFail('Some thing wrong update api user $e');
+    }
+    return result;
   }
 }

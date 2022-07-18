@@ -2,14 +2,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:old_stuff_exchange/config/routes/routes.dart';
-import 'package:old_stuff_exchange/config/themes/appColors.dart';
 import 'package:old_stuff_exchange/view_model/provider/main_provider/main_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp(Phoenix(child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
               primarySwatch: Colors.purple,
               fontFamily: "Blinker",
             ),
-            initialRoute: "/rechargeMoneyPage",
+            initialRoute: "/signInPage",
             routes: Routes.routes),
       ),
     );

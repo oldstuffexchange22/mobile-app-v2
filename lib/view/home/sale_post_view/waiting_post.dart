@@ -24,7 +24,7 @@ class _WaitingPostState extends State<WaitingPost> {
         Provider.of<PostSaleProvider>(context, listen: false);
     postSaleProvider.getPostWaiting();
     emptyWidget = const CenterRefresh();
-    _timer = Timer(const Duration(milliseconds: 10000), () {
+    _timer = Timer(const Duration(milliseconds: 7000), () {
       if (postSaleProvider.waitingPosts.isEmpty) {
         setState(() {
           emptyWidget = const CenterNotifyEmpty();
@@ -54,7 +54,11 @@ class _WaitingPostState extends State<WaitingPost> {
             : ListView.builder(
                 itemBuilder: ((context, i) {
                   Post post = posts[i];
+                  Color titleColor = i % 2 == 0
+                      ? Colors.white
+                      : Colors.black.withOpacity(0.04);
                   return ListTile(
+                    tileColor: titleColor,
                     leading: Padding(
                       padding: const EdgeInsets.only(top: 10),
                       child: SizedBox(
@@ -72,7 +76,7 @@ class _WaitingPostState extends State<WaitingPost> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(
-                          height: 16,
+                          height: 8,
                         ),
                         Text(
                           post.title,
@@ -93,7 +97,7 @@ class _WaitingPostState extends State<WaitingPost> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Giá : ${post.price}00',
+                              'Giá : ${post.price}00đ',
                               style: PrimaryFont.regular(18)
                                   .copyWith(color: Colors.red),
                             ),
@@ -112,7 +116,10 @@ class _WaitingPostState extends State<WaitingPost> {
                           height: 2,
                         ),
                         Text(
-                            'Ngày tạo : ${post.lastUpdatedAt.add(const Duration(hours: 7)).toString().substring(0, 16)}')
+                            'Ngày tạo : ${post.lastUpdatedAt.add(const Duration(hours: 7)).toString().substring(0, 16)}'),
+                        const SizedBox(
+                          height: 8,
+                        ),
                       ],
                     ),
                   );

@@ -11,6 +11,7 @@ import 'package:old_stuff_exchange/config/themes/fonts.dart';
 import 'package:old_stuff_exchange/model/entity/user.dart';
 import 'package:old_stuff_exchange/utils/utils.dart';
 import 'package:old_stuff_exchange/view_model/provider/home_page_provider.dart';
+import 'package:old_stuff_exchange/view_model/provider/sign_in_provider.dart';
 import 'package:old_stuff_exchange/view_model/provider/user_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -26,6 +27,7 @@ class _ExtendInfoViewState extends State<ExtendInfoView> {
   Widget build(BuildContext context) {
     UserProvider userProvider = Provider.of<UserProvider>(context);
     HomePageProvider homePageProvider = Provider.of<HomePageProvider>(context);
+    SignInProvider signInProvider = Provider.of<SignInProvider>(context);
     User? currentUser = userProvider.currentUser;
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
@@ -95,23 +97,25 @@ class _ExtendInfoViewState extends State<ExtendInfoView> {
                 endIndent: 0,
               ),
               Padding(
-                padding: EdgeInsets.only(left: 8),
+                padding: const EdgeInsets.only(left: 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ListTile(
-                      leading: Padding(
-                        padding: EdgeInsets.only(top: 2),
-                        child: Icon(
-                          FontAwesome5.wallet,
-                          size: 28,
-                          color: Colors.amberAccent,
+                        leading: const Padding(
+                          padding: EdgeInsets.only(top: 2),
+                          child: Icon(
+                            FontAwesome5.wallet,
+                            size: 28,
+                            color: Colors.amberAccent,
+                          ),
                         ),
-                      ),
-                      title: Text('Ví'),
-                    ),
+                        title: const Text('Ví'),
+                        onTap: () {
+                          Navigator.of(context).pushNamed('/rechargeMoneyPage');
+                        }),
                     ListTile(
-                      leading: Padding(
+                      leading: const Padding(
                         padding: EdgeInsets.only(top: 2),
                         child: Icon(
                           Typicons.doc_text,
@@ -119,13 +123,13 @@ class _ExtendInfoViewState extends State<ExtendInfoView> {
                           color: Colors.blue,
                         ),
                       ),
-                      title: Text('Đơn mua'),
+                      title: const Text('Đơn mua'),
                       onTap: () {
                         homePageProvider.selectedPageIndex = 2;
                       },
                     ),
                     ListTile(
-                      leading: Padding(
+                      leading: const Padding(
                         padding: EdgeInsets.only(top: 2),
                         child: Icon(
                           ModernPictograms.article_alt,
@@ -133,13 +137,13 @@ class _ExtendInfoViewState extends State<ExtendInfoView> {
                           color: Colors.green,
                         ),
                       ),
-                      title: Text('Đơn bán'),
+                      title: const Text('Đơn bán'),
                       onTap: () {
                         homePageProvider.selectedPageIndex = 1;
                       },
                     ),
                     ListTile(
-                      leading: Padding(
+                      leading: const Padding(
                         padding: EdgeInsets.only(top: 2),
                         child: Icon(
                           FontAwesome5.history,
@@ -147,21 +151,14 @@ class _ExtendInfoViewState extends State<ExtendInfoView> {
                           color: Colors.blue,
                         ),
                       ),
-                      title: Text('Lịch sử giao dịch'),
+                      title: const Text('Lịch sử giao dịch'),
+                      onTap: () {
+                        Navigator.of(context)
+                            .pushNamed('/historyTransactionPage');
+                      },
                     ),
                     ListTile(
-                      leading: Padding(
-                        padding: EdgeInsets.only(top: 4),
-                        child: Icon(
-                          FontAwesome5.money_bill_alt,
-                          size: 28,
-                          color: Colors.green,
-                        ),
-                      ),
-                      title: Text('Nạp tiền'),
-                    ),
-                    ListTile(
-                      leading: Padding(
+                      leading: const Padding(
                         padding: EdgeInsets.only(top: 2),
                         child: Icon(
                           FontAwesome5.user_edit,
@@ -169,7 +166,10 @@ class _ExtendInfoViewState extends State<ExtendInfoView> {
                           color: Colors.amber,
                         ),
                       ),
-                      title: Text('Cập nhật thông tin'),
+                      title: const Text('Cập nhật thông tin'),
+                      onTap: () {
+                        Navigator.of(context).pushNamed("/updateInfoPage");
+                      },
                     ),
                   ],
                 ),
@@ -181,8 +181,8 @@ class _ExtendInfoViewState extends State<ExtendInfoView> {
                 indent: 0,
                 endIndent: 0,
               ),
-              const ListTile(
-                leading: Padding(
+              ListTile(
+                leading: const Padding(
                   padding: EdgeInsets.only(top: 2),
                   child: Icon(
                     FontAwesome5.sign_out_alt,
@@ -190,12 +190,49 @@ class _ExtendInfoViewState extends State<ExtendInfoView> {
                     color: Colors.red,
                   ),
                 ),
-                title: Text('Đăng xuất'),
+                title: const Text('Đăng xuất'),
+                onTap: () async {
+                  await _showConfirmSignOutDialog();
+                },
               ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  Future<void> _showConfirmSignOutDialog() async {
+    return showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (context) {
+          SignInProvider signInProvider = Provider.of<SignInProvider>(context);
+          return AlertDialog(
+            content: const SingleChildScrollView(
+              child: Text('Bạn muốn đăng xuất ?'),
+            ),
+            actions: [
+              ElevatedButton(
+                onPressed: () async {
+                  await signInProvider.signOut(context);
+                },
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.green)),
+                child: const Text('Xác nhận'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.red)),
+                child: const Text('Hủy'),
+              )
+            ],
+          );
+        });
   }
 }

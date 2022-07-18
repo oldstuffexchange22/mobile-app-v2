@@ -1,3 +1,4 @@
+import 'package:old_stuff_exchange/model/entity/transaction.dart';
 import 'package:old_stuff_exchange/view/login/update_address_page.dart';
 import 'package:old_stuff_exchange/view_model/provider/aparment_provider.dart';
 import 'package:old_stuff_exchange/view_model/provider/building_provider.dart';
@@ -6,6 +7,7 @@ import 'package:old_stuff_exchange/view_model/provider/post_bought_provider.dart
 import 'package:old_stuff_exchange/view_model/provider/post_create_provider.dart';
 import 'package:old_stuff_exchange/view_model/provider/post_payment_provider.dart';
 import 'package:old_stuff_exchange/view_model/provider/post_sale_provider.dart';
+import 'package:old_stuff_exchange/view_model/provider/transaction_provider.dart';
 import 'package:old_stuff_exchange/view_model/provider/update_address_provider.dart';
 import 'package:old_stuff_exchange/view_model/provider/user_provider.dart';
 import 'package:provider/provider.dart';
@@ -35,6 +37,8 @@ class MainProviders {
     ChangeNotifierProvider<PostBoughtProvider>(
         create: ((context) => PostBoughtProvider())),
     ChangeNotifierProvider<HomePageProvider>(
-        create: (context) => HomePageProvider())
+        create: (context) => HomePageProvider()),
+    ChangeNotifierProvider<TransactionProvider>(
+        create: ((context) => TransactionProvider()))
   ];
 }

@@ -27,4 +27,20 @@ class ApartmentReqImp implements ApartmentRep {
     }
     return result;
   }
+
+  @override
+  Future<Apartment> getById(String id) async {
+    late Apartment result;
+    try {
+      String token = await secureStorage.readSecureData('token');
+      Options optionsRequest =
+          Options(headers: {HttpHeaders.authorizationHeader: 'Bearer $token'});
+      Response response = await Dio()
+          .get('${UrlApi.apartmentController}/$id', options: optionsRequest);
+      result = Apartment.fromJson(response.data['data']);
+    } catch (e) {
+      showToastFail('Some thing went wrong when call apartment id $e');
+    }
+    return result;
+  }
 }

@@ -63,12 +63,6 @@ class PostProvider with ChangeNotifier {
         var fileName = element.path.substring(element.path.lastIndexOf('/'));
         var snapshot =
             await _storage.ref().child('posts/$postId/$fileName').putFile(file);
-        // ListResult result =
-        //     await _storage.ref().child('posts').child(postId).listAll();
-        // result.items.forEach((element) async {
-        //   String downloadLink = await element.getDownloadURL();
-        //   print(downloadLink);
-        // });
         String downloadLink = await snapshot.ref.getDownloadURL();
         imagesUrl.add(downloadLink);
       }

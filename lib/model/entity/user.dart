@@ -8,20 +8,20 @@ class User {
       required this.userName,
       required this.fullName,
       required this.status,
-      this.phone,
-      this.gender,
+      required this.phone,
+      required this.gender,
       required this.email,
-      this.imagesUrl,
+      required this.imagesUrl,
       this.role,
       this.building});
   String id;
   String userName;
   String fullName;
-  String? status;
-  String? phone;
-  String? gender;
-  String? email;
-  String? imagesUrl;
+  String status;
+  String phone;
+  String gender;
+  String email;
+  String imagesUrl;
   Role? role;
   Building? building;
 
@@ -48,7 +48,5 @@ class User {
         'gender': gender,
         'email': email,
         'imageUrl': imagesUrl,
-        'role': role?.toJson(),
-        'buildingId': building?.id
       };
 }

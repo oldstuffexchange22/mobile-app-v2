@@ -42,9 +42,8 @@ class PostRepImp implements PostRepository {
           });
       result =
           (response.data['data'] as List).map((e) => Post.fromJson(e)).toList();
-      print(result);
     } catch (e) {
-      print(e);
+      showToastFail('Api list post error $e');
     }
     return result;
   }

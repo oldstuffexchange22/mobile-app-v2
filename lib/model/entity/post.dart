@@ -24,6 +24,7 @@ class Post {
   DateTime lastUpdatedAt;
   String status;
   String userBought;
+  User? userBoughtObject;
   String authorId;
   User? author;
   List<Product> products = [];

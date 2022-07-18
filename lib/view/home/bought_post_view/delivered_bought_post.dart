@@ -24,7 +24,7 @@ class _DeliveredBoughtPostState extends State<DeliveredBoughtPost> {
         Provider.of<PostBoughtProvider>(context, listen: false);
     postBoughtProvider.getDeliveredPost();
     emptyWidget = const CenterRefresh();
-    _timer = Timer(const Duration(milliseconds: 10000), () {
+    _timer = Timer(const Duration(milliseconds: 7000), () {
       if (postBoughtProvider.deliveredPosts.isEmpty) {
         setState(() {
           emptyWidget = const CenterNotifyEmpty();
@@ -54,7 +54,11 @@ class _DeliveredBoughtPostState extends State<DeliveredBoughtPost> {
             : ListView.builder(
                 itemBuilder: ((context, i) {
                   Post post = posts[i];
+                  Color titleColor = i % 2 == 0
+                      ? Colors.white
+                      : Colors.black.withOpacity(0.04);
                   return ListTile(
+                    tileColor: titleColor,
                     leading: Padding(
                       padding: const EdgeInsets.only(top: 10),
                       child: SizedBox(
@@ -72,7 +76,7 @@ class _DeliveredBoughtPostState extends State<DeliveredBoughtPost> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(
-                          height: 16,
+                          height: 8,
                         ),
                         Text(
                           post.title,
@@ -83,7 +87,7 @@ class _DeliveredBoughtPostState extends State<DeliveredBoughtPost> {
                           height: 6,
                         ),
                         Text(
-                          'Giá : ${post.price}00',
+                          'Giá : ${post.price}00đ',
                           style: PrimaryFont.regular(18)
                               .copyWith(color: Colors.red),
                         ),
@@ -118,7 +122,10 @@ class _DeliveredBoughtPostState extends State<DeliveredBoughtPost> {
                               child: const Text('Chưa nhận hàng'),
                             )
                           ],
-                        )
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
                       ],
                     ),
                   );

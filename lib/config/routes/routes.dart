@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:old_stuff_exchange/view/home/extend_view/history_transaction.dart';
 import 'package:old_stuff_exchange/view/home/extend_view/recharge_money.dart';
+import 'package:old_stuff_exchange/view/home/extend_view/update_info.dart';
 import 'package:old_stuff_exchange/view/home/home_page.dart';
 import 'package:old_stuff_exchange/view/login/signin_page.dart';
 import 'package:old_stuff_exchange/view/login/update_address_page.dart';
@@ -13,6 +15,8 @@ class Routes {
     "/updateAddressPage": (context) => const UpdateAddressPage(),
     "/createPostPage": (context) => const CreatePost(),
     "/paymentPostPage": (context) => const PaymentPost(),
-    "/rechargeMoneyPage" : (context) => const RechargeMoneyPage()
+    "/rechargeMoneyPage": (context) => const RechargeMoneyPage(),
+    "/historyTransactionPage": (context) => const HistoryTransactionPage(),
+    "/updateInfoPage": (context) => const UpdateInfoPage()
   };
 }

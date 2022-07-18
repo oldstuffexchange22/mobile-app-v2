@@ -20,6 +20,12 @@ class PaymentPost extends StatefulWidget {
 
 class _PaymentPostState extends State<PaymentPost> {
   String _walletSelected = WalletType.basic;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -30,10 +36,14 @@ class _PaymentPostState extends State<PaymentPost> {
     List<Product> products = currentPost.products;
     Wallet? defaultWallet = userProvider.defaultWallet;
     Wallet? promotionWallet = userProvider.promotionWallet;
+    if (((promotionWallet?.balance ?? 0) - currentPost.price) <= 0 &&
+        ((defaultWallet?.balance ?? 0) - currentPost.price) <= 0) {
+      _walletSelected = '';
+    }
     return Scaffold(
         appBar: AppBar(
-          title: const Align(
-              alignment: Alignment.center, child: Text('Thanh toán đơn hàng')),
+          centerTitle: true,
+          title: const Text('Thanh toán đơn hàng'),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16),
@@ -90,6 +100,13 @@ class _PaymentPostState extends State<PaymentPost> {
                                 }
                               });
                             }),
+                      ),
+                      Visibility(
+                        visible: false,
+                        child: Radio(
+                            value: '',
+                            groupValue: _walletSelected,
+                            onChanged: (String? selected) {}),
                       )
                     ],
                   ),
@@ -135,21 +152,24 @@ class _PaymentPostState extends State<PaymentPost> {
               const SizedBox(
                 height: 12,
               ),
-              _walletSelected == WalletType.basic
-                  ? Padding(
-                      padding: const EdgeInsets.only(left: 16),
-                      child: Text(
-                        'Số dư còn lại (ví chính) : ${(defaultWallet?.balance ?? 0) - currentPost.price}00 đ',
-                        style: PrimaryFont.regular(20),
+              Visibility(
+                visible: _walletSelected != '',
+                child: _walletSelected == WalletType.basic
+                    ? Padding(
+                        padding: const EdgeInsets.only(left: 16),
+                        child: Text(
+                          'Số dư còn lại (ví chính) : ${(defaultWallet?.balance ?? 0) - currentPost.price}00 đ',
+                          style: PrimaryFont.regular(20),
+                        ),
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.only(left: 16),
+                        child: Text(
+                          'Số dư còn lại (ví khuyến mãi): ${(promotionWallet?.balance ?? 0) - currentPost.price}00 đ',
+                          style: PrimaryFont.regular(20),
+                        ),
                       ),
-                    )
-                  : Padding(
-                      padding: const EdgeInsets.only(left: 16),
-                      child: Text(
-                        'Số dư còn lại (ví khuyến mãi): ${(promotionWallet?.balance ?? 0) - currentPost.price}00 đ',
-                        style: PrimaryFont.regular(20),
-                      ),
-                    ),
+              ),
               const SizedBox(
                 height: 8,
               ),
@@ -159,11 +179,18 @@ class _PaymentPostState extends State<PaymentPost> {
         floatingActionButton: SizedBox(
             width: screenSize.width * 0.5,
             child: FloatingActionButton(
+              backgroundColor: _walletSelected == ''
+                  ? Colors.purple.withOpacity(0.5)
+                  : Colors.purple,
               shape: const BeveledRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(2))),
               onPressed: () async {
-                await postPaymentProvider.paymentPost(
-                    context, currentPost.id, _walletSelected);
+                if (_walletSelected != '') {
+                  await postPaymentProvider.paymentPost(
+                      context, currentPost.id, _walletSelected);
+                } else {
+                  // showToastFail('Chưa chọn ví để thanh toán');
+                }
               },
               child: const Text('Thanh toán'),
             )),

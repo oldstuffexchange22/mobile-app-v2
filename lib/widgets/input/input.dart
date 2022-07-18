@@ -77,8 +77,8 @@ class InputApp extends StatelessWidget {
   }
 }
 
-class InputNumberApp extends StatelessWidget {
-  const InputNumberApp(
+class InputMoneyApp extends StatelessWidget {
+  const InputMoneyApp(
       {Key? key,
       this.minLines = 1,
       this.maxLines,
@@ -112,6 +112,10 @@ class InputNumberApp extends StatelessWidget {
           if (isRequired == true && (value == null || value.isEmpty)) {
             return 'Không thể bỏ trống';
           }
+          // try {
+          //   bool check = int.parse(value ?? '') % 10 != 0;
+          //   if (!check) return 'Số tiền phải chia hết cho 10.000';
+          // } catch (e) {}
           return null;
         },
         keyboardType: TextInputType.number,
@@ -144,6 +148,7 @@ class InputNumberApp extends StatelessWidget {
               borderSide: const BorderSide(color: Colors.red, width: 2),
             ),
             prefixIcon: icon,
+            suffixText: '.000đ',
             labelText: label,
             labelStyle: MaterialStateTextStyle.resolveWith((states) {
               return PrimaryFont.regular(16).copyWith(color: kColorText);

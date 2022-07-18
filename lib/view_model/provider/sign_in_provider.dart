@@ -1,12 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:old_stuff_exchange/config/toast/toast.dart';
 import 'package:old_stuff_exchange/model/entity/post.dart';
 import 'package:old_stuff_exchange/repository/implement/post_repository_implement.dart';
+import 'package:old_stuff_exchange/view_model/provider/aparment_provider.dart';
+import 'package:old_stuff_exchange/view_model/provider/building_provider.dart';
+import 'package:old_stuff_exchange/view_model/provider/home_page_provider.dart';
 import 'package:old_stuff_exchange/view_model/provider/user_provider.dart';
 import 'package:old_stuff_exchange/view_model/service/service_storage.dart';
 import 'package:old_stuff_exchange/widgets/overlay/custom_overlay.dart';
@@ -72,5 +76,16 @@ class SignInProvider with ChangeNotifier {
       context.loaderOverlay.hide();
       navigator.pushReplacementNamed('/signInPage');
     }
+  }
+
+  Future<void> signOut(BuildContext context) async {
+    context.loaderOverlay.show();
+    final SecureStorage secureStorage = SecureStorage();
+    secureStorage.deleteAll();
+    Navigator.of(context)
+        .pushNamedAndRemoveUntil('/signInPage', (route) => false);
+    showToastSuccess('Đăng xuất thành công');
+    context.loaderOverlay.hide();
+    Phoenix.rebirth(context);
   }
 }

@@ -62,7 +62,7 @@ class _PostListViewState extends State<PostListView> {
                 builderDelegate: PagedChildBuilderDelegate<Post>(
                     animateTransitions: true,
                     itemBuilder: (context, item, index) =>
-                        PostListItem(post: item)))
+                        PostListItem(post: item, index: index)))
           ],
         ),
       ),

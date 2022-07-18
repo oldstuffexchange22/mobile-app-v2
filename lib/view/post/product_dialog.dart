@@ -84,8 +84,8 @@ class _ProductDialogState extends State<ProductDialog> {
                   width: screenSize.width * 0.6,
                   icon: const Icon(Icons.description_outlined),
                   controller: _descriptionController),
-              const LabelBox(label: 'Giá : ( ví dụ : 20 = 20.000đ)'),
-              InputNumberApp(
+              const LabelBox(label: 'Giá : '),
+              InputMoneyApp(
                   isRequired: true,
                   width: screenSize.width * 0.6,
                   icon: const Icon(Icons.description_outlined),

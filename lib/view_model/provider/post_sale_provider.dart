@@ -71,12 +71,12 @@ class PostSaleProvider with ChangeNotifier {
   Future<void> getPostDelivery() async {
     try {
       _deliveryPosts = await PostRepImp().getPostStatus(PostStatus.DELIVERY);
-      // int count = 0;
-      // _deliveredPosts.forEach((element) async {
-      //   User? userBuyer = await UserRepImp().getUserById(element.userBought);
-      //   _deliveredPosts[count].userBoughtObject = userBuyer;
-      //   count++;
-      // });
+      int count = 0;
+      _deliveredPosts.forEach((element) async {
+        User? userBuyer = await UserRepImp().getUserById(element.userBought);
+        _deliveredPosts[count].userBoughtObject = userBuyer;
+        count++;
+      });
       // for (var post in _deliveredPosts) {
       //   User? userBuyer = await UserRepImp().getUserById(post.userBought);
       //   _deliveredPosts[count].userBoughtObject = userBuyer;

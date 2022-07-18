@@ -17,6 +17,6 @@ class Routes {
     "/paymentPostPage": (context) => const PaymentPost(),
     "/rechargeMoneyPage": (context) => const RechargeMoneyPage(),
     "/historyTransactionPage": (context) => const HistoryTransactionPage(),
-    "/updateInfoPage": (context) => const UpdateInfoPage()
+    "/updateInfoPage": (context) => const UpdateInfoPage(),
   };
 }

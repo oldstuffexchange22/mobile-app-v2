@@ -25,7 +25,7 @@ class _WaitingPostState extends State<WaitingPost> {
     postSaleProvider.getPostWaiting();
     emptyWidget = const CenterRefresh();
     _timer = Timer(const Duration(milliseconds: 7000), () {
-      if (postSaleProvider.waitingPosts.isEmpty) {
+      if (postSaleProvider.waitingPosts.isEmpty && mounted) {
         setState(() {
           emptyWidget = const CenterNotifyEmpty();
         });

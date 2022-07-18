@@ -23,12 +23,13 @@ import '../url_api/url_api.dart';
 class SignInProvider with ChangeNotifier {
   final _firebaseAuth = FirebaseAuth.instance;
   final SecureStorage secureStorage = SecureStorage();
+  final googleSignIn = GoogleSignIn();
 
   Future<void> signInWithGoogle(BuildContext context) async {
     try {
-      final googleSignIn = GoogleSignIn();
       final googleUser = await googleSignIn.signIn();
       if (googleUser != null) {
+        googleSignIn.signInSilently();
         context.loaderOverlay
             .show(widget: const CustomOverlay(content: 'Đang đăng nhập...'));
         final googleAuth = await googleUser.authentication;
@@ -87,5 +88,6 @@ class SignInProvider with ChangeNotifier {
     showToastSuccess('Đăng xuất thành công');
     context.loaderOverlay.hide();
     Phoenix.rebirth(context);
+    await googleSignIn.disconnect();
   }
 }

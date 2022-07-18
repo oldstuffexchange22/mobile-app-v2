@@ -27,7 +27,7 @@ class _MoneyOutPageState extends State<MoneyOutPage> {
     transactionProvider.loadDataMoneyOut();
     emptyWidget = const CenterRefresh();
     _timer = Timer(const Duration(milliseconds: 7000), () {
-      if (transactionProvider.moneyOutTransaction.isEmpty) {
+      if (transactionProvider.moneyOutTransaction.isEmpty && mounted) {
         setState(() {
           emptyWidget = const CenterNotifyEmpty();
         });

@@ -10,6 +10,7 @@ class Post {
       required this.imageUrl,
       required this.createdAt,
       required this.userBought,
+      required this.userBoughtObject,
       required this.authorId,
       required this.author,
       required this.lastUpdatedAt,
@@ -30,7 +31,7 @@ class Post {
   List<Product> products = [];
 
   factory Post.fromJson(Map<String, dynamic> json) => Post(
-      id: json['id'],
+      id: json['id'], 
       title: json['title'] ?? '',
       description: json['description'] ?? '',
       price: json['price'] ?? '',
@@ -38,6 +39,9 @@ class Post {
       createdAt: DateTime.parse(json['createdAt']),
       lastUpdatedAt: DateTime.parse(json['lastUpdatedAt']),
       userBought: json['userBought'] ?? '',
+      userBoughtObject: json['userBoughtObject'] == null
+          ? null
+          : User.fromJson(json['userBoughtObject']),
       authorId: json['authorId'] ?? '',
       author: json['author'] == null ? null : User.fromJson(json['author']),
       status: json['status'] ?? '',

@@ -25,10 +25,10 @@ class _AccomplishedBoughtPostState extends State<AccomplishedBoughtPost> {
     postBoughtProvider.getAccomplishedPost();
     emptyWidget = const CenterRefresh();
     _timer = Timer(const Duration(milliseconds: 7000), () {
-      if (postBoughtProvider.accomplishedPosts.isEmpty) {
+      if (postBoughtProvider.accomplishedPosts.isEmpty && mounted) {
         setState(() {
-          emptyWidget = const CenterNotifyEmpty();
-        });
+            emptyWidget = const CenterNotifyEmpty();
+          });
       }
     });
     super.initState();
@@ -54,7 +54,7 @@ class _AccomplishedBoughtPostState extends State<AccomplishedBoughtPost> {
             : ListView.builder(
                 itemBuilder: ((context, i) {
                   Post post = posts[i];
-                   Color titleColor = i % 2 == 0
+                  Color titleColor = i % 2 == 0
                       ? Colors.white
                       : Colors.black.withOpacity(0.04);
                   return ListTile(

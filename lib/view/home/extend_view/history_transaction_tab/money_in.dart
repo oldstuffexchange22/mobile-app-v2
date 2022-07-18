@@ -29,7 +29,7 @@ class _MoneyInPageState extends State<MoneyInPage> {
     transactionProvider.loadDataMoneyIn();
     emptyWidget = const CenterRefresh();
     _timer = Timer(const Duration(milliseconds: 7000), () {
-      if (transactionProvider.moneyInTransaction.isEmpty) {
+      if (transactionProvider.moneyInTransaction.isEmpty && mounted) {
         setState(() {
           emptyWidget = const CenterNotifyEmpty();
         });

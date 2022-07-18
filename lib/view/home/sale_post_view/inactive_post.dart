@@ -25,7 +25,7 @@ class _InactivePostState extends State<InactivePost> {
     postSaleProvider.getPostInactive();
     emptyWidget = const CenterRefresh();
     _timer = Timer(const Duration(milliseconds: 7000), () {
-      if (postSaleProvider.inactivePosts.isEmpty) {
+      if (postSaleProvider.inactivePosts.isEmpty && mounted) {
         setState(() {
           emptyWidget = const CenterNotifyEmpty();
         });

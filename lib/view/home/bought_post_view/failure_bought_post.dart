@@ -25,10 +25,10 @@ class _FailureBoughtPostState extends State<FailureBoughtPost> {
     postSaleProvider.getFailurePost();
     emptyWidget = const CenterRefresh();
     _timer = Timer(const Duration(milliseconds: 7000), () {
-      if (postSaleProvider.failurePosts.isEmpty) {
+      if (postSaleProvider.failurePosts.isEmpty && mounted) {
         setState(() {
-          emptyWidget = const CenterNotifyEmpty();
-        });
+            emptyWidget = const CenterNotifyEmpty();
+          });
       }
     });
     super.initState();

@@ -116,11 +116,13 @@ class _PostListViewState extends State<PostListView> {
       final newItems = await PostRepImp().getList(
           PostStatus.ACTIVE, pageIndex, _pageSize, 'TITLE', _searchTerm, null);
       final isLastPage = newItems.length < _pageSize;
-      if (isLastPage) {
-        _pagingController.appendLastPage(newItems);
-      } else {
-        final nextPageKey = pageKey + newItems.length;
-        _pagingController.appendPage(newItems, nextPageKey);
+      if (mounted) {
+        if (isLastPage) {
+          _pagingController.appendLastPage(newItems);
+        } else {
+          final nextPageKey = pageKey + newItems.length;
+          _pagingController.appendPage(newItems, nextPageKey);
+        }
       }
     } catch (error) {
       _pagingController.error = error;

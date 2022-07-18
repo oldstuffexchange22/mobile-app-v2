@@ -25,7 +25,7 @@ class _DeliveryBoughtPostState extends State<DeliveryBoughtPost> {
     postBoughtProvider.getDeliveryPost();
     emptyWidget = const CenterRefresh();
     _timer = Timer(const Duration(milliseconds: 7000), () {
-      if (postBoughtProvider.deliveryPosts.isEmpty) {
+      if (postBoughtProvider.deliveryPosts.isEmpty && mounted) {
         setState(() {
           emptyWidget = const CenterNotifyEmpty();
         });

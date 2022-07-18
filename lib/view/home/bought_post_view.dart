@@ -46,7 +46,9 @@ class _BoughtPostViewState extends State<BoughtPostView>
     PostBoughtProvider postBoughtProvider =
         Provider.of<PostBoughtProvider>(context, listen: false);
     await postBoughtProvider.getAllPost();
-    setState(() {});
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   @override

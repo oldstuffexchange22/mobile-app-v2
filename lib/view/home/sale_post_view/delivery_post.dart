@@ -25,7 +25,7 @@ class _DeliveryPostState extends State<DeliveryPost> {
     postSaleProvider.getPostDelivery();
     emptyWidget = const CenterRefresh();
     _timer = Timer(const Duration(milliseconds: 7000), () {
-      if (postSaleProvider.deliveryPosts.isEmpty) {
+      if (postSaleProvider.deliveryPosts.isEmpty && mounted) {
         setState(() {
           emptyWidget = const CenterNotifyEmpty();
         });
@@ -93,6 +93,34 @@ class _DeliveryPostState extends State<DeliveryPost> {
                         const SizedBox(
                           height: 6,
                         ),
+                        Text(
+                          'Người mua : ${post.userBoughtObject?.fullName ?? ''}',
+                          style: PrimaryFont.regular(14),
+                        ),
+                        (post.userBoughtObject?.phone.isEmpty ?? true)
+                            ? const SizedBox()
+                            : Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const SizedBox(
+                                    height: 6,
+                                  ),
+                                  Text(
+                                    'Người mua : ${post.userBoughtObject?.fullName ?? ''}',
+                                    style: PrimaryFont.regular(14),
+                                  ),
+                                ],
+                              ),
+                        const SizedBox(
+                          height: 6,
+                        ),
+                        Text(
+                          'Tòa nhà : ${post.userBoughtObject?.building?.name ?? ''}',
+                          style: PrimaryFont.regular(14),
+                        ),
+                        const SizedBox(
+                          height: 6,
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -117,7 +145,7 @@ class _DeliveryPostState extends State<DeliveryPost> {
                         ),
                         Text(
                             'Ngày tạo : ${post.lastUpdatedAt.add(const Duration(hours: 7)).toString().substring(0, 16)}'),
-                            const SizedBox(
+                        const SizedBox(
                           height: 8,
                         ),
                       ],

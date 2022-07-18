@@ -22,15 +22,15 @@ class Product {
       price: json['price'] ?? '',
       status: json['status'] ?? '',
       categoryId: json['categoryId'] ?? '',
-      postId: json['post'] ?? '');
+      postId: json['postId'] ?? '');
 
   Map<String, dynamic> toJson() => {
-    'id' : id,
-    'name' : name,
-    'description' : description,
-    'price' : price,
-    'status' : status,
-    'categoryId' : categoryId,
-    'postId' : postId
-  };
+        'id': id,
+        'name': name,
+        'description': description,
+        'price': price,
+        'status': status,
+        'categoryId': categoryId,
+        'postId': postId
+      };
 }

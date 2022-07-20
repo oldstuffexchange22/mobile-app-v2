@@ -170,9 +170,9 @@ class PostRepImp implements PostRepository {
     }
     return result;
   }
-  
+
   @override
-  Future<List<Post>> getPostUserBoughtStatus(String status) async{
+  Future<List<Post>> getPostUserBoughtStatus(String status) async {
     List<Post> result = [];
     try {
       String token = await secureStorage.readSecureData('token');
@@ -195,9 +195,9 @@ class PostRepImp implements PostRepository {
     }
     return result;
   }
-  
+
   @override
-  Future<Post?> inactive(String postId) async{
+  Future<Post?> inactive(String postId) async {
     Post? result;
     try {
       Options optionRequest = await OptionRequest.optionAuthorize();

@@ -93,7 +93,7 @@ class PostSaleProvider with ChangeNotifier {
       _deliveredPosts = await PostRepImp().getPostStatus(PostStatus.DELIVERED);
       notifyListeners();
     } catch (e) {
-      showToastFail('Error provider post status $e');
+      // showToastFail('Error provider post status $e');
     }
   }
 
@@ -103,7 +103,7 @@ class PostSaleProvider with ChangeNotifier {
           await PostRepImp().getPostStatus(PostStatus.ACCOMPLISHED);
       notifyListeners();
     } catch (e) {
-      showToastFail('Error provider post status $e');
+      // showToastFail('Error provider post status $e');
     }
   }
 

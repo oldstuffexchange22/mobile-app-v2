@@ -106,7 +106,7 @@ class _DeliveryPostState extends State<DeliveryPost> {
                                     height: 6,
                                   ),
                                   Text(
-                                    'Người mua : ${post.userBoughtObject?.fullName ?? ''}',
+                                    'Số điện thoại : 0${post.userBoughtObject?.phone ?? ''}',
                                     style: PrimaryFont.regular(14),
                                   ),
                                 ],

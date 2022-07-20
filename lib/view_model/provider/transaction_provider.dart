@@ -22,7 +22,7 @@ class TransactionProvider with ChangeNotifier {
           await TransactionReqImp().getTransactionsWithUser();
       notifyListeners();
     } catch (e) {
-      showToastFail('Load data transactions error $e');
+      // showToastFail('Load data transactions error $e');
     }
   }
 
@@ -40,7 +40,7 @@ class TransactionProvider with ChangeNotifier {
       }
       notifyListeners();
     } catch (e) {
-      showToastFail('Load data transactions error $e');
+      // showToastFail('Load data transactions error $e');
     }
   }
 
@@ -56,7 +56,7 @@ class TransactionProvider with ChangeNotifier {
       }
       notifyListeners();
     } catch (e) {
-      showToastFail('Load data transactions error $e');
+      // showToastFail('Load data transactions error $e');
     }
   }
 }

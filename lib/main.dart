@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_phone_auth_handler/firebase_phone_auth_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:old_stuff_exchange/config/routes/routes.dart';
@@ -21,15 +22,17 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: MainProviders.providers,
       child: GlobalLoaderOverlay(
-        child: MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'Old stuff exchange',
-            theme: ThemeData(
-              primarySwatch: Colors.purple,
-              fontFamily: "Blinker",
-            ),
-            initialRoute: "/signInPage",
-            routes: Routes.routes),
+        child: FirebasePhoneAuthProvider(
+          child: MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: 'Old stuff exchange',
+              theme: ThemeData(
+                primarySwatch: Colors.purple,
+                fontFamily: "Blinker",
+              ),
+              initialRoute: "/signInPage",
+              routes: Routes.routes),
+        ),
       ),
     );
   }

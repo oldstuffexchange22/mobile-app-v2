@@ -29,7 +29,7 @@ class PostPaymentProvider with ChangeNotifier {
       }
       context.loaderOverlay.hide();
     } catch (e) {
-      showToastFail(e.toString());
+      // showToastFail(e.toString());
       context.loaderOverlay.hide();
     }
   }

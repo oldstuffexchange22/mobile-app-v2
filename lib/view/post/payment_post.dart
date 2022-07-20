@@ -173,19 +173,41 @@ class _PaymentPostState extends State<PaymentPost> {
               const SizedBox(
                 height: 8,
               ),
+              userProvider.currentUser?.phone.isNotEmpty ?? false
+                  ? const SizedBox()
+                  : SizedBox(
+                      width: screenSize.width * 0.8,
+                      child: RichText(
+                        text: TextSpan(
+                            text: 'Chú ý : ',
+                            style: PrimaryFont.semiBold(14).copyWith(
+                                color: Colors.red,
+                                decoration: TextDecoration.underline),
+                            children: [
+                              TextSpan(
+                                  text:
+                                      'bạn phải cập nhật số điện thoại trước khi thanh toán.',
+                                  style: PrimaryFont.semiBold(14).copyWith(
+                                      decoration: TextDecoration.none,
+                                      fontStyle: FontStyle.italic))
+                            ]),
+                      ),
+                    )
             ],
           ),
         ),
         floatingActionButton: SizedBox(
             width: screenSize.width * 0.5,
             child: FloatingActionButton(
-              backgroundColor: _walletSelected == ''
+              backgroundColor: (_walletSelected == '' ||
+                      (userProvider.currentUser?.phone.isEmpty ?? true))
                   ? Colors.purple.withOpacity(0.5)
                   : Colors.purple,
               shape: const BeveledRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(2))),
               onPressed: () async {
-                if (_walletSelected != '') {
+                if (_walletSelected != '' &&
+                    (userProvider.currentUser?.phone.isNotEmpty ?? false)) {
                   await postPaymentProvider.paymentPost(
                       context, currentPost.id, _walletSelected);
                 } else {
@@ -202,7 +224,7 @@ class _PaymentPostState extends State<PaymentPost> {
       borderRadius: BorderRadius.circular(12),
       child: Container(
         color: kColorPrimary.withOpacity(0.12),
-        height: 36 * products.length.toDouble(),
+        height: 50 * products.length.toDouble(),
         child: Padding(
           padding: const EdgeInsets.all(12),
           child: ListView.builder(

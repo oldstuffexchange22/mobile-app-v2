@@ -30,7 +30,7 @@ class PostBoughtProvider with ChangeNotifier {
           await PostRepImp().getPostUserBoughtStatus(PostStatus.FAILURE);
       notifyListeners();
     } catch (e) {
-      showToastFail('Error provider post status $e');
+      // showToastFail('Error provider post status $e');
     }
   }
 
@@ -44,7 +44,7 @@ class PostBoughtProvider with ChangeNotifier {
           await PostRepImp().getPostUserBoughtStatus(PostStatus.DELIVERY);
       notifyListeners();
     } catch (e) {
-      showToastFail('Error provider post status $e');
+      // showToastFail('Error provider post status $e');
     }
   }
 
@@ -54,7 +54,7 @@ class PostBoughtProvider with ChangeNotifier {
           await PostRepImp().getPostUserBoughtStatus(PostStatus.DELIVERED);
       notifyListeners();
     } catch (e) {
-      showToastFail('Error provider post status $e');
+      // showToastFail('Error provider post status $e');
     }
   }
 
@@ -64,7 +64,7 @@ class PostBoughtProvider with ChangeNotifier {
           await PostRepImp().getPostUserBoughtStatus(PostStatus.ACCOMPLISHED);
       notifyListeners();
     } catch (e) {
-      showToastFail('Error provider post status $e');
+      // showToastFail('Error provider post status $e');
     }
   }
 
@@ -74,7 +74,7 @@ class PostBoughtProvider with ChangeNotifier {
           await PostRepImp().getPostUserBoughtStatus(PostStatus.FAILURE);
       notifyListeners();
     } catch (e) {
-      showToastFail('Error provider post status $e');
+      // showToastFail('Error provider post status $e');
     }
   }
 
@@ -95,7 +95,7 @@ class PostBoughtProvider with ChangeNotifier {
       }
       context.loaderOverlay.hide();
     } catch (e) {
-      showToastFail('Error provider post status $e');
+      // showToastFail('Error provider post status $e');
       context.loaderOverlay.hide();
     }
   }
@@ -117,7 +117,7 @@ class PostBoughtProvider with ChangeNotifier {
       }
       context.loaderOverlay.hide();
     } catch (e) {
-      showToastFail('Error provider post status $e');
+      // showToastFail('Error provider post status $e');
       context.loaderOverlay.hide();
     }
   }

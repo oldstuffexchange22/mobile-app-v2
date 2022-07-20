@@ -14,6 +14,7 @@ import 'package:old_stuff_exchange/config/toast/toast.dart';
 import 'package:old_stuff_exchange/model/entity/apartment.dart';
 import 'package:old_stuff_exchange/model/entity/user.dart';
 import 'package:old_stuff_exchange/utils/utils.dart';
+import 'package:old_stuff_exchange/view/home/verify_phone/verify_phone_number_screen.dart';
 import 'package:old_stuff_exchange/view_model/provider/user_provider.dart';
 import 'package:old_stuff_exchange/widgets/overlay/custom_overlay.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -36,6 +37,7 @@ class _UpdateInfoPageState extends State<UpdateInfoPage> {
   late TextEditingController _phoneController;
   bool _isShowBtnPhoneSave = false;
   bool _isShowPhoneState = false;
+  late Widget _prefixPhone = const SizedBox();
   late FocusNode _focusPhone;
 
   late User? _originUser;
@@ -104,6 +106,7 @@ class _UpdateInfoPageState extends State<UpdateInfoPage> {
       _phoneController.text = 'Thêm số điện thoại';
     } else {
       _phoneController.text = _originUser?.phone ?? '';
+      _prefixPhone = const Text('+84 ');
     }
     _selectedGender = (_originUser?.gender ?? '').isEmpty
         ? 'OTHER'
@@ -275,13 +278,19 @@ class _UpdateInfoPageState extends State<UpdateInfoPage> {
                                       MaterialStateProperty.all<Color>(
                                           Colors.green)),
                               onPressed: () async {
-                                await userProvider.updateUser(
-                                    context, 'PHONE', _phoneController.text);
-                                setState(() {
-                                  _originUser?.phone = _phoneController.text;
-                                  _isShowBtnPhoneSave = false;
-                                  _isShowPhoneState = false;
-                                });
+                                String phoneNumber =
+                                    '+84${_phoneController.text}';
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) =>
+                                        VerifyPhoneNumberScreen(
+                                            phoneNumber: phoneNumber)));
+                                // await userProvider.updateUser(
+                                //     context, 'PHONE', _phoneController.text);
+                                // setState(() {
+                                //   _originUser?.phone = _phoneController.text;
+                                //   _isShowBtnPhoneSave = false;
+                                //   _isShowPhoneState = false;
+                                // });
                               },
                               child: const Text('Lưu')),
                         ),
@@ -377,11 +386,11 @@ class _UpdateInfoPageState extends State<UpdateInfoPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Flexible(
-                            flex: 2,
+                            flex: 3,
                             child: Text(currentUser?.email ?? '',
                                 style: PrimaryFont.regular(16))),
                         Flexible(
-                            flex: 1,
+                            flex: 2,
                             child: Padding(
                               padding:
                                   const EdgeInsets.only(right: 20, bottom: 6),
@@ -484,6 +493,7 @@ class _UpdateInfoPageState extends State<UpdateInfoPage> {
       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
       keyboardType: TextInputType.number,
       decoration: InputDecoration(
+          prefix: _prefixPhone,
           hintStyle: PrimaryFont.regular(16).copyWith(color: Colors.black),
           border: InputBorder.none,
           errorBorder: OutlineInputBorder(
@@ -500,7 +510,7 @@ class _UpdateInfoPageState extends State<UpdateInfoPage> {
       focusNode: _focusPhone,
       onChanged: (String value) {
         _isShowBtnPhoneSave =
-            (_originUser?.phone != value && value.length > 5) ? true : false;
+            (_originUser?.phone != value && value.length == 9) ? true : false;
         if (_isShowBtnPhoneSave != _isShowPhoneState) {
           setState(() {
             _isShowPhoneState = _isShowBtnPhoneSave;
@@ -515,12 +525,14 @@ class _UpdateInfoPageState extends State<UpdateInfoPage> {
       if (_phoneController.text == 'Thêm số điện thoại') {
         setState(() {
           _phoneController.clear();
+          _prefixPhone = const Text('+84 ');
         });
       }
     } else {
       if (_phoneController.text == '') {
         setState(() {
           _phoneController.text = 'Thêm số điện thoại';
+          _prefixPhone = const SizedBox();
         });
       }
     }

@@ -3,6 +3,7 @@ import 'package:old_stuff_exchange/view/home/extend_view/history_transaction.dar
 import 'package:old_stuff_exchange/view/home/extend_view/recharge_money.dart';
 import 'package:old_stuff_exchange/view/home/extend_view/update_info.dart';
 import 'package:old_stuff_exchange/view/home/home_page.dart';
+import 'package:old_stuff_exchange/view/home/verify_phone/verify_phone_number_screen.dart';
 import 'package:old_stuff_exchange/view/login/signin_page.dart';
 import 'package:old_stuff_exchange/view/login/update_address_page.dart';
 import 'package:old_stuff_exchange/view/post/create_post.dart';

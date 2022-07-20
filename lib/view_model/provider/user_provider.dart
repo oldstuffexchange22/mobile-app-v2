@@ -50,7 +50,9 @@ class UserProvider with ChangeNotifier {
       });
     } else {
       _currentUser = await UserRepImp().getUserById(userId);
-      _currentApartment = await ApartmentReqImp().getById(apartmentId);
+      if (apartmentId.isNotEmpty) {
+        _currentApartment = await ApartmentReqImp().getById(apartmentId);
+      }
     }
     notifyListeners();
   }
